@@ -1063,7 +1063,6 @@ public class expert
         traversal(arr);
     }
 }
-
 //1329
 package code.solution;
 import java.util.Arrays;
@@ -1071,9 +1070,11 @@ public class expert
 {
     static void traversal(int [][]arr)
     {
-        for(int i=0;i<arr.length;i++)
+        int row = arr.length;
+        int col = arr[0].length;
+        for(int i=0;i<row;i++)
         {
-            for(int j=0;j<arr.length;j++)
+            for(int j=0;j<col;j++)
             {
                 System.out.print(arr[i][j]+"  ");
             }
@@ -1099,9 +1100,9 @@ public class expert
         int temp ;int p=transpose.length;
         while(p>0)
         {
-            for(int i=0;i<transpose.length;i++)
+            for(int i=0;i<col;i++)
             {
-                for(int j=1;j<transpose.length;j++)
+                for(int j=1;j<row;j++)
                 {
                     if(transpose[i][j-1] > transpose[i][j])
                     {
@@ -1126,12 +1127,14 @@ public class expert
 
     static void sortMatrix(int [][]arr)
     {
-        int temp ;int p=arr.length;
+        int temp ;int p=arr[0].length;
+        int row = arr.length;
+        int col = arr[0].length;
         while(p>0)
         {
-            for(int i=0;i<arr.length;i++)
+            for(int i=0;i<row;i++)
             {
-                for(int j=1;j<arr.length;j++)
+                for(int j=1;j<col;j++)
                 {
                     if(arr[i][j-1] > arr[i][j])
                     {
@@ -1147,7 +1150,7 @@ public class expert
     }
     public static void main(String []args)
     {
-        int [][]arr = {{9,7,8},{5,1,4},{3,0,2}};
+        int [][]arr = {{9,7,8},{5,1,4},{3,0,2},{0,0,0}};
         traversal(arr);
         sortMatrix(arr);
     }
@@ -1261,7 +1264,297 @@ public class expert
 
     }
 }
+//347
+package code.solution;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class expert
+{
+    //just for traversal
+    static void traversal(int []arr)
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+"  ");
+        }
+        System.out.println();
+    }
+
+
+
+    //driver method which runs the code
+    static void freqElem(int []arr,int k)
+    {
+//        int []freq = new int[arr.length/2];
+        List freq = new ArrayList();
+        int count;Arrays.sort(arr);int p=0;          //1,1,2,2
+
+       for(int i=0;i<arr.length;i++)
+       {
+           count=0;
+           for(int j=i;j<arr.length;j++)
+           {
+               if(arr[i]==arr[j])
+               {
+                   count++;
+               }
+           }
+           if(count >= k)
+           {
+               freq.add(arr[i]);p++;
+           }
+       }
+        int []a = freq.stream().mapToInt(i -> (int) i).toArray();
+        traversal(a);
+    }
+
+    public static void main(String []args)
+    {
+        int []arr = {2,5,4,5,4,1,0,6,9,8,9,8,2};
+        int k = 2;
+        traversal(arr);
+        freqElem(arr,k);
+    }
+}
+
+//215
+package code.solution;
+import java.util.Arrays;
+public class expert
+{
+    static void KthLargestElem(int []nums,int k)
+    {
+        Arrays.sort(nums);
+        int elem = nums[nums.length-k];
+        System.out.println(elem);
+    }
+    public static void main(String []args)
+    {
+        int[] nums = {3,2,3,1,2,4,5,5,6};
+        int k = 4;
+        KthLargestElem(nums,k);
+    }
+}
+
+//238
+package code.solution;
+public class expert
+{
+    static void traversal(int []arr)
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+"  ");
+        }
+        System.out.println();
+    }
+    static void proOFArr(int []nums)
+    {
+        int []product = new int[nums.length];int pro;
+        for(int i=0;i<nums.length;i++)
+        {
+            pro = 1;
+            for(int j=0;j<nums.length;j++)
+            {
+                if(i != j)
+                {
+                    pro = pro * nums[j];
+                }
+            }
+            product[i] = pro;
+        }
+        traversal(product);
+    }
+    public static void main(String[] args)
+    {
+        int []nums = {-1,1,0,-3,3};
+        traversal(nums);
+        proOFArr(nums);
+    }
+}
+//1351
+package code.solution;
+public class expert
+{
+    static void countNegative(int [][]mat)
+    {
+        int neg = 0;int i=0;int j;
+        int row = mat.length;int col = mat[0].length;
+        while(i<row)
+        {
+            j=0;
+            while(j<col)
+            {
+                if(mat[i][j]<0)
+                    neg++;
+                j++;
+            }
+            i++;
+        }
+        System.out.println(neg);
+    }
+    public static void main(String[] args)
+    {
+        int [][]mat = {{4,5,7,8},{-8,7,9,4},{8,-10,7,-8},{4,5,8,-3}};
+        countNegative(mat);
+    }
+}
+//2125
+package code.solution;
+public class expert
+{
+    static void traversal(int arr[])
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    static void shift(int []arr)
+    {
+        for(int i=0;i<arr.length-1;i++)
+        {
+            if(arr[i]==0)
+            {
+                int temp = arr[i];
+                arr[i] = arr[i+1];
+                arr[i+1] = temp;
+            }
+        }
+    }
+
+    static int oneFind(String bank)
+    {
+        int one = 0;
+        char[] ch = bank.toCharArray();
+        for(int i=0;i<bank.length();i++)
+        {
+            if(ch[i]=='1')
+            {
+                one++;
+            }
+        }
+        return one;
+    }
+
+    static void laserBeam(String[] bank)
+    {
+        int laser = 0;int[] maintain=new int[bank.length];
+        for(int i=0;i<bank.length;i++)
+        {
+            maintain[i] = oneFind(bank[i]);
+        }
+        shift(maintain);
+        for(int i=1;i< maintain.length;i++)
+        {
+           laser += (maintain[i-1]*maintain[i]);
+        }
+        System.out.println(laser);
+    }
+    public static void main(String []args)
+    {
+        String[] bank = {"0","1","1","1"};
+        laserBeam(bank);
+    }
+}
+
+//1337
+package code.solution;
+public class expert
+{
+    static void traversal(int [][]arr)
+    {
+        int row = arr.length;
+        int col = arr[0].length;
+        for(int i=0;i<row;i++)
+        {
+            for(int j=0;j<col;j++)
+            {
+                System.out.print(arr[i][j]+"  ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    static void traversal(int arr[])
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+" ");
+        }
+    }
+
+    static void weakestCountry(int [][]mat,int k)
+    {
+        int row = mat.length;int col = mat[0].length;
+        int []outPut = new int[k];int one;int pk=0;
+        int []soldier = new int[row];
+        for(int i=0;i<row;i++)
+        {
+            one=0;
+            for(int j=0;j<col;j++)
+            {
+                if(mat[i][j]==1)
+                {
+                    one++;
+                }
+                soldier[i]=one;
+            }
+        }
+        traversal(soldier);
+    }
+
+
+    static void incrementOrder(int []sold)
+    {
+        int []outPut = new int[3];int i=0;int j=0;int s=0;
+        while(i< sold.length)
+        {
+            while(j< sold.length)
+            {
+                if()
+                {
+
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args)
+    {
+       int [][]mat = {{1,1,0,0,0},{1,1,1,1,0},{1,0,0,0,0},{1,1,0,0,0},{1,1,1,1,1}};
+       traversal(mat);int k=3;weakestCountry(mat,k);
+       int []sold = {2, 4, 1, 2, 5};
+
+    }
+}
 */
+package code.solution;
+public class expert
+{
+    static void rootNum(int n)
+    {
+        int root = 0;
+        for(int i=2;i<n;i++)
+        {
+            if(i*i==n)
+            {
+                root = i;
+                break;
+            }
+        }
+        System.out.println(root);
+    }
+    public static void main(String[] args)
+    {
+        int n=4;
+        rootNum(n);
+    }
+}
 
 
 
