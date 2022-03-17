@@ -1118,16 +1118,10 @@ public class expert
 
     }
 
-    static void swapArr(int a,int b)
-    {
-        int temp = a;
-        a = b;
-        b = temp;
-    }
-
     static void sortMatrix(int [][]arr)
     {
-        int temp ;int p=arr[0].length;
+        int temp ;
+        int p=arr[0].length;
         int row = arr.length;
         int col = arr[0].length;
         while(p>0)
@@ -1152,7 +1146,7 @@ public class expert
     {
         int [][]arr = {{9,7,8},{5,1,4},{3,0,2},{0,0,0}};
         traversal(arr);
-        sortMatrix(arr);
+//        sortMatrix(arr);
     }
 }
 //merge Sort
@@ -1532,30 +1526,582 @@ public class expert
 
     }
 }
-*/
+//kadane's Algorithm  53
 package code.solution;
 public class expert
 {
-    static void rootNum(int n)
+    static void maxSub(int []nums)
     {
-        int root = 0;
-        for(int i=2;i<n;i++)
+        int maxSum = 0;int currSum = 0;
+        for(int i=0;i<nums.length;i++)       //-2,1,-3,4,-1,2,1,-5,4
         {
-            if(i*i==n)
+            currSum = currSum + nums[i];
+            if(maxSum < currSum)
             {
-                root = i;
-                break;
+                maxSum = currSum;
+            }
+            if(currSum<0)
+            {
+                currSum = 0;
             }
         }
-        System.out.println(root);
+        System.out.println(maxSum);
     }
     public static void main(String[] args)
     {
-        int n=4;
-        rootNum(n);
+        int []nums = {-2,1,-3,4,-1,2,1,-5,4};
+        maxSub(nums);
+
+    }
+}
+//8
+package code.solution;
+public class expert
+{
+    static void stringToInt(String s)
+    {
+        double num = 0;int dig = s.length()-1;
+        double ten = Math.pow(10,dig);
+        double ans = 0;int i = 0;int j=s.length();
+        if(s.charAt(0)=='-')
+        {
+            i = 1;
+            ten /= 10;
+        }
+        while(i<j)
+        {
+            num = (int)s.charAt(i)-48;
+            num = num * ten;//10
+            ans =ans + num;
+            ten /= 10;
+            i++;
+        }
+    }
+    public static void main(String[] args)
+    {
+        String s = "-10009";
+        stringToInt(s);
+
+    }
+}
+//Reverse number 7
+//29 - Divide Two Integers
+package code.solution;
+class sorting
+{
+    void traversal(int []arr)
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+"  ");
+        }
+        System.out.println();
+    }
+    //Bubble Sort
+    void bubbleSort(int []arr)        //5,4,2,1
+    {
+        System.out.println("Unsorted Array");
+        traversal(arr);
+        for(int i=0;i<arr.length;i++)
+        {
+            for(int j=1;j<arr.length-i;j++)
+            {
+                if(arr[j] < arr[j-1])
+                {
+                    //swap
+                    int temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+                }
+            }
+        }
+        System.out.println("Sorted Array");
+        traversal(arr);
+    }
+
+    //selection Sort
+    void selectionSort(int []arr)
+    {
+        int min= 0;
+        for(int i=0;i<arr.length-1;i++)
+        {
+            min = i;
+            for(int j=i+1;j<arr.length;j++)
+            {
+                if(arr[min] > arr[j])
+                {
+                    int temp = arr[j];
+                    arr[j] = arr[min];
+                    arr[min] = temp;
+                }
+            }
+        }
+        System.out.println("Sorted Array");
+        traversal(arr);
+    }
+
+    //Insertion Sort
+    void insertionSort(int []arr)
+    {
+        int key = 0;
+        for(int i=1;i<arr.length;i++)//5,6,7,1,2,4,0
+        {
+            key = arr[i];
+            int j = i-1;
+            while(j >= 0 && arr[j]> key)
+            {
+                arr[j+1] = arr[j];
+                j--;
+            }
+            arr[j] = key;
+        }
+    }
+
+
+    //Quick Sort
+    int partition(int []arr,int low,int high)
+    {
+        int i = 0;int j = arr.length-1;int pivot = arr[0];
+        while(i<j)
+        {
+            while(arr[i]<=pivot) i++;
+            while(arr[j]>=pivot) j--;
+
+            if(i<j)
+            {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        if(i<j)
+        {
+            int temp = pivot;
+            pivot = arr[j];
+            arr[j] = temp;
+        }
+        return j;
+    }
+
+
+    void quickSort(int []arr,int low,int high)
+    {
+        if(low<high)
+        {
+            int index = partition(arr,low,high);
+            quickSort(arr,low,index);
+            quickSort(arr,index+1,high);
+        }
+    }
+}
+public class expert
+{
+    public static void main(String []args)
+    {
+        int []arr = {1,9,7,2,4,7,3,-8,0,-9};
+        sorting sort = new sorting();
+//        sort.bubbleSort(arr);
+//        sort.selectionSort(arr);
+        sort.quickSort(arr,0,arr.length-1);
+    }
+}
+//1351
+package code.solution;
+public class expert
+{
+    static void countNegative(int [][]mat)
+    {
+        int neg = 0;int i=0;int j;
+        int row = mat.length;int col = mat[0].length;
+        while(i<row)
+        {
+            j=0;
+            while(j<col)
+            {
+                if(mat[i][j]<0)
+                    neg++;
+                j++;
+            }
+            i++;
+        }
+        System.out.println(neg);
+    }
+    public static void main(String[] args)
+    {
+        int [][]mat = {{4,5,7,8},{-8,7,9,4},{8,-10,7,-8},{4,5,8,-3}};
+        countNegative(mat);
+    }
+}
+package code.solution;
+public class expert
+{
+    static void traversal(int []arr)
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+"  ");
+        }
+        System.out.println();
+    }
+
+    //Quick Sort
+    static int partition(int []arr,int low,int high) //4,2,5,3,1,0,-5
+    {
+        int i = low+1;
+        int j = high;
+        int pivot = arr[low];
+        int temp = 0;
+        while(i<j)
+        {
+            while(arr[i]<=pivot) i++;
+            while(arr[j]>pivot) j--;
+
+            if(i<j)
+            {
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        temp = arr[low];
+        arr[low] = arr[j];
+        arr[j] = temp;
+        return j;
+    }
+
+
+    static void quickSort(int []arr,int low,int high)
+    {
+        if(low<high)
+        {
+            int index = partition(arr,low,high);
+            quickSort(arr,low,index-1);
+            quickSort(arr,index+1,high);
+        }
+    }
+    public static void main(String[] args)
+    {
+        int arr[] = {4,2,5,3,1,0,-5};
+        traversal(arr);
+        quickSort(arr,0,arr.length-1);
+        traversal(arr);
+
     }
 }
 
+package code.solution;
+public class expert
+{
+    static void traversal(int []arr)
+    {
+        for(int i=0;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+"  ");
+        }
+        System.out.println();
+    }
+
+    static void merge(int []arr,int low,int mid,int high,int len)
+    {
+        int []b = new int[len];
+        int i,j,k;
+        i=low;
+        j=mid+1;
+        k=low;
+
+        while(i<=mid && j<=high)
+        {
+            if(arr[i]<arr[j])
+            {
+                b[k] = arr[i];
+                i++;k++;
+            }
+            else
+            {
+                b[k] = arr[j];
+                j++;k++;
+            }
+        }
+        while(i<=mid)
+        {
+            b[k] = arr[i];
+            i++;k++;
+        }
+        while(j<=high)
+        {
+            b[k] = arr[j];
+            j++;k++;
+        }
+        for(int p = low;p<=high;p++)
+        {
+            arr[p] = b[p];
+        }
+    }
+    static void mergeSort(int []arr,int low,int high,int len)
+    {
+        if(low<high)
+        {
+            int mid = (low+high)/2;
+            mergeSort(arr,low,mid-1,len);
+            mergeSort(arr,mid+1,high,len);
+            merge(arr,low,mid,high,len);
+        }
+    }
+    public static void main(String []args)
+    {
+        int []arr = {2,1,8,4,0};
+        int len = arr.length;
+        traversal(arr);
+        mergeSort(arr,0,arr.length-1,len);
+        traversal(arr);
+    }
+}
+//451 - sort the string
+package code.solution;
+public class expert
+{
+    static void traversal(int [][]a)
+    {
+        int row= a.length;
+        int col = a[0].length;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+                System.out.print(a[i][j] + "  ");
+            }
+        System.out.println();
+        }
+    }
+    static void row_matrixSort(int [][]a)
+    {
+        int row= a.length;
+        int col = a[0].length;
+        for(int p =0;p<row;p++){
+            for(int i=0;i<row;i++){
+                for(int j=0;j<col-1;j++){
+                    if(a[i][j]>a[i][j+1]){
+                        int temp = a[i][j];
+                        a[i][j]  = a[i][j+1];
+                        a[i][j+1] = temp;
+                    }
+                }
+            }
+        }
+    }
+    public static void main(String []args)
+    {
+        int [][]a = {{9,7,8},{5,1,4},{3,0,2},{0,0,0}};
+        System.out.println("Unsorted matrix");
+        traversal(a);
+        System.out.println("Sorted Matrix");
+        row_matrixSort(a);
+    }
+}
+//287
+package code.solution;
+public class expert
+{
+    static void repeatedElem(int []nums)
+    {
+        int []a = new int[nums.length];
+        int elem = 0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(a[nums[i]]==0)
+            {
+                a[i] = 1;
+            }
+            else {
+                elem = nums[i];
+                break;
+            }
+        }
+        System.out.println(elem);
+    }
+    public static void main(String[] args)
+    {
+        int nums[] = {1,2,3,4,1};
+        repeatedElem(nums);
+    }
+}
+
+//442
+//Input: nums = [1,1,2]
+//        Output: [1]
+
+//Input: nums = [1]
+//        Output: []
+//return in list
+//find the elem which repeats atleast twice in the list
+package code.solution;
+import java.util.ArrayList;
+import java.util.List;
+public class expert
+{
+    static void twiceRepeat(int []nums)
+    {
+        int []a = new int[nums.length+1];
+        List repeat = new ArrayList();   //
+        int elem = 0;                    //0,0,0,0,0,0,0,0
+        for(int i=0;i<nums.length;i++)   //4,3,2,7,7,2,3,1
+        {
+            if(a[nums[i]]==0)
+            {
+                a[nums[i]]= 1;
+            }
+            else
+            {
+                repeat.add(nums[i]);
+            }
+        }
+        System.out.println(repeat);
+    }
+    public static void main(String[] args)
+    {
+         int []nums = {4,3,2,7,8,2,3,4};       //Output: [2,3]
+        twiceRepeat(nums);
+    }
+}
+
+//2133 valid matrix
+package code.solution;
+public class expert
+{
+    static void traversal(int [][]arr)
+    {
+        for(int i =0;i<arr.length;i++)
+        {
+            for(int j=0;j<arr[0].length;j++)
+            {
+                System.out.print(arr[i][j]+"  ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void isValidmatrix(int [][]matrix)
+    {
+        boolean [][]bool = new boolean[matrix.length][matrix.length];
+        for(int i=0;i<matrix.length;i++)
+        {
+            for(int j=0;j<matrix.length;j++)
+            {
+                for(int k=1;k<matrix.length+1;k++)
+                {
+                    if(matrix[i][j]==k && !bool[i][j] ){
+//                      i---->  {2, 1, 4, 3}
+//                        {1, 2, 3, 4}
+//                        {4, 5, 3, 1}
+//                        {2, 1, 4, 3}
+                        bool[i][j] = true;
+                    }
+                }
+            }
+        }
+
+        boolean flag = true;
+
+        for(int i =0;i<bool.length;i++)
+        {
+            for(int j=0;j<bool[0].length;j++)
+            {
+//                System.out.print(bool[i][j]+"  ");
+                if(bool[i][j]==false && flag == true)
+                {
+                    flag = false;
+//                    System.out.println(matrix[i][j]);
+                    break;
+                }
+            }
+//            System.out.println();
+        }
+        System.out.println(flag);
+    }
+
+    public static void main(String[] args)
+    {
+        int [][]matrix ={{2,1,4,3},
+                         {1,2,3,4},
+                         {4,5,3,1},
+                         {2,1,4,3}};
+        isValidmatrix(matrix);
+    }
+}
+
+
+
+//1832
+//Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
+//        Output: true
+//        Explanation: sentence contains at least one of every letter of the English alphabet.
+package code.solution;
+public class expert
+{
+    public static void isPanagram(String s)
+    {
+        boolean []boo = new boolean[150];
+        for(int i=0;i<s.length();i++)
+        {
+            for(int j=97;j<123;j++)
+            {
+                if((int)s.charAt(i) == j)
+                {
+                    boo[j] = true;
+                }
+            }
+        }
+
+        boolean flag = true;
+        for(int i =97;i<123;i++)
+        {
+            if(boo[i]==false && flag == true)
+            {
+                flag = false;
+                break;
+            }
+        }
+        System.out.println(flag);
+    }
+    public static void main(String[] args)
+    {
+        String s = "abcxyz";
+        isPanagram(s);
+    }
+}*/
+//1844
+//Input: s = "a1b2c3d4e"
+//        Output: "abbdcfdhe"
+//        Output: "abbdcfdhe"
+//        Explanation: The digits are replaced as follows:
+//        - s[1] -> shift('a',1) = 'b'
+//        - s[3] -> shift('b',2) = 'd'
+//        - s[5] -> shift('c',3) = 'f'
+//        - s[7] -> shift('d',4) = 'h'
+package code.solution;
+public class expert
+{
+    static void shiftingTheChar(String s)
+    {
+        char temp;int val;
+        String p = "";
+        for(int i=0;i<s.length();i++)
+        {
+            temp = s.charAt(i);
+            val= (int)temp;
+            if(val<58)
+            {
+                temp = (char)(((s.charAt(i-1)-96)+(val-48))+96);
+            }
+            p += temp;
+        }
+        System.out.println(p);
+    }
+    public static void main(String []args)
+    {
+        String s = "a1b2c3d4e";
+        shiftingTheChar(s);
+    }
+}
 
 
 
