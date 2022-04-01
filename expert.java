@@ -13,7 +13,6 @@ public class expert
 {
     static void traversal(int arr[])
     {
-
         for(int i=0;i<arr.length;i++)
         {
             System.out.print(arr[i]+" ");
@@ -1314,7 +1313,7 @@ public class expert
 }
 
 //215
-package code.solution;
+package com.practiceCode;
 import java.util.Arrays;
 public class expert
 {
@@ -1331,7 +1330,6 @@ public class expert
         KthLargestElem(nums,k);
     }
 }
-
 //238
 package code.solution;
 public class expert
@@ -2067,41 +2065,56 @@ public class expert
         String s = "abcxyz";
         isPanagram(s);
     }
-}*/
-//1844
-//Input: s = "a1b2c3d4e"
-//        Output: "abbdcfdhe"
-//        Output: "abbdcfdhe"
-//        Explanation: The digits are replaced as follows:
-//        - s[1] -> shift('a',1) = 'b'
-//        - s[3] -> shift('b',2) = 'd'
-//        - s[5] -> shift('c',3) = 'f'
-//        - s[7] -> shift('d',4) = 'h'
-package code.solution;
+}
+
+package com.practiceCode;
 public class expert
 {
-    static void shiftingTheChar(String s)
+    public static void main(String[] args)
     {
-        char temp;int val;
-        String p = "";
-        for(int i=0;i<s.length();i++)
-        {
-            temp = s.charAt(i);
-            val= (int)temp;
-            if(val<58)
-            {
-                temp = (char)(((s.charAt(i-1)-96)+(val-48))+96);
-            }
-            p += temp;
-        }
-        System.out.println(p);
+        String patterns[] = {"a","b","c"};
+        String word = "aaaaabbbbb";
+        System.out.println(word.contains(patterns[0]));
+        System.out.println(word.contains(patterns[1]));
+        System.out.println(word.contains(patterns[2]));
     }
-    public static void main(String []args)
+}*/
+package com.practiceCode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class expert
+{
+    static void traversal(int []arr)
     {
-        String s = "a1b2c3d4e";
-        shiftingTheChar(s);
+        for(int i=1;i<arr.length;i++)
+        {
+            System.out.print(arr[i]+"  ");
+        }
+        System.out.println();
+    }
+    public static void main(String[] args) {
+        int a[] = {2,2,2,2,3,3};
+        int[] b = {2,3,2,3,2,3};
+        int[] c = new int[(int)Math.min(a.length, b.length)];
+        int i=0;
+        for(int f=0;f<a.length;f++){
+            for(int k=0;k<b.length;k++){
+                if(a[f]==b[k]){
+                    c[i] = a[f];
+                    i++;
+                }
+            }
+        }
+        for (int x=0; x<i; x++){
+            System.out.println(c[x]);
+        }
     }
 }
+
+
+
 
 
 
