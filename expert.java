@@ -2078,40 +2078,453 @@ public class expert
         System.out.println(word.contains(patterns[1]));
         System.out.println(word.contains(patterns[2]));
     }
-}*/
+}
+
 package com.practiceCode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class expert
 {
-    static void traversal(int []arr)
+    static void reverse(String s)
     {
-        for(int i=1;i<arr.length;i++)
+        char temp;
+        int low = 0;
+        int high = s.length()-1;
+        char []c = s.toCharArray();
+        while(low < high)
         {
-            System.out.print(arr[i]+"  ");
+            temp = c[low];
+            c[low] = c[high];
+            c[high] = temp;
+            low++;high--;
         }
-        System.out.println();
+        String p = new String(c);
+        System.out.println(p);
     }
-    public static void main(String[] args) {
-        int a[] = {2,2,2,2,3,3};
-        int[] b = {2,3,2,3,2,3};
-        int[] c = new int[(int)Math.min(a.length, b.length)];
-        int i=0;
-        for(int f=0;f<a.length;f++){
-            for(int k=0;k<b.length;k++){
-                if(a[f]==b[k]){
-                    c[i] = a[f];
-                    i++;
-                }
-            }
+
+    static String reverse(char []c,int low,int high)
+    {
+        char temp;
+
+        if(low < high)
+        {
+            temp = c[low];
+            c[low] = c[high];
+            c[high] = temp;
+
+            reverse(c,low+1,high-1);
         }
-        for (int x=0; x<i; x++){
-            System.out.println(c[x]);
+        String p = new String(c);
+        return p;
+    }
+
+    static void traversal(int []a)
+    {
+        for(int i=0;i<a.length;i++)
+            System.out.print(a[i]+"  ");
+    }
+    static int[] reverse(int []a,int low,int high)
+    {
+        int temp;
+
+        if(low < high)
+        {
+            temp = a[low];
+            a[low] = a[high];
+            a[high] = temp;
+
+            reverse(a,low+1,high-1);
         }
+        return a;
+    }
+
+    public static void main(String[] args)
+    {
+//      String s = "hello";
+//      char []c = s.toCharArray();
+//      System.out.println(reverse(c,0,s.length()-1));
+
+        int []arr = {1,2,3,4};
+        traversal(arr);
+        reverse(arr,0,arr.length-1);
+        System.out.println();
+        traversal(arr);
     }
 }
+
+               ----------------------------"Ramazan Mubarak"----------------------------
+package com.practiceCode;
+import java.util.Scanner;
+public class expert
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Your Name");
+        String name = sc.nextLine();
+        System.out.println("Ramazan Mubarak "+name);
+    }
+}
+
+//printing all the subsequence
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+class solution
+{
+    void subseQuence(List list,List input,int index)
+    {
+        if(index == input.size())
+        {
+            System.out.println(list);
+            return;
+        }
+        list.add(input.get(index));
+        subseQuence(list,input,index+1);
+        list.remove(input.get(index));
+        subseQuence(list,input,index+1);
+    }
+}
+public class expert
+{
+    public static void main(String[] args)
+    {
+        List input = new ArrayList();
+        input.add(1);
+        input.add(2);
+        input.add(3);
+        List list = new ArrayList();
+        solution sol = new solution();
+        sol.subseQuence(list,input,0);
+    }
+}
+//2108
+package com.practiceCode;
+public class expert
+{
+    static boolean isPalindrome(String s,int i,int low,int high)
+    {
+        if(i == s.length()-1)
+        {
+            return true;
+        }
+        else if(s.charAt(low) != s.charAt(high))
+        {
+            return false;
+        }
+        return isPalindrome(s,i+1,low+1,high-1);
+    }
+
+    static String isPalindrome(String []str)
+    {
+        String s = "Sory";
+        for(int i=0;i<str.length;i++)
+        {
+            if(isPalindrome(str[i],0,0,str[i].length()-1) == true)
+            {
+                s = str[i];
+                break;
+            }
+        }
+        return s;
+    }
+    public static void main(String[] args)
+    {
+        String []str = {"ada","pao","rcar"};
+        System.out.println(isPalindrome(str));
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+class solution
+{
+    boolean flag = false;
+    int subseQuence(List list,List input,int index,int sum,int s)
+    {
+        if(index == input.size())
+        {
+            if(s == sum)
+            {
+                System.out.println(list);
+                return 1;
+            }
+            else
+                return 0;
+        }
+        list.add(input.get(index));
+        s += (int)input.get(index);
+        int l=subseQuence(list,input,index+1,sum,s);
+        list.remove(input.get(index));
+        s -= (int)input.get(index);
+        int r=subseQuence(list,input,index+1,sum,s);
+        return l+r;
+    }
+}
+public class expert
+{
+    public static void main(String[] args)
+    {
+        List input = new ArrayList();
+        input.add(1);
+        input.add(2);
+        input.add(7);
+        input.add(5);
+        input.add(4);
+        int sum = 8;
+        int s = 0;
+        List list = new ArrayList();
+        solution sol = new solution();
+//        sol.subseQuence(list,input,0,sum,0);
+        System.out.println(sol.subseQuence(list,input,0,sum,0));
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+public class expert
+{
+    static void print(int n)
+    {
+        if(n == 0)
+            return;
+        System.out.println(n);
+        print(n-1);
+    }
+
+    static void print(int []a,int n)
+    {
+        if(n == -1)
+            return;
+        else
+        print(a,n-1);
+        System.out.println(a[n]);
+    }
+
+    static void print(String s,int high)
+    {
+        if(high == -1)
+            return;
+        else
+            print(s,high-1);
+        System.out.println(s.charAt(high));
+    }
+
+    static List arrToList(int []a,int high,List list)
+    {
+        if(high == -1)
+        {
+            return list;
+        }
+        else
+            arrToList(a,high-1,list);
+        list.add(a[high]);
+        return list;
+    }
+
+    static List<Integer> insert(int []a,int elem,int ind,int high,List list)
+    {
+        if(high == ind)
+        {
+            list.add(a[high]);
+            list.add(elem);
+        }
+        else if(high == -1){
+            System.out.println(list);
+            return list;
+        }
+        else
+        list.add(a[high]);
+        insert(a,elem,ind,high-1,list);
+        return list;
+    }
+
+
+
+
+    public static void main(String[] args)
+    {
+//        int n=8;
+//        print(n);
+
+//        int []a = {1,2,3,4,5,6};
+//        print(a,a.length-1);
+
+//        String s = "Hello";
+//        print(s,s.length()-1);
+
+//        int []a = {5,3,4,1,2};
+//        List list = new ArrayList();
+//        int elem = 4;int ind = 3;
+//        insert(a,elem,ind,a.length-1,list);
+
+//        int []a = {53,3,4,1,2};
+//        List list = new ArrayList();
+//        System.out.println(arrToList(a,a.length-1,list));
+
+          int []a = {3,4,1,2};
+          List list = new ArrayList();
+
+
+    }
+}
+
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+public class expert
+{
+    //printing the power set of an int array
+    static void powerSet(int []a, int low, List<Integer> ds)
+    {
+        if(low == a.length)
+        {
+            System.out.println(ds);
+            return;
+        }
+        ds.add(a[low]);
+        powerSet(a,low+1,ds);
+        ds.remove(ds.size()-1);
+        powerSet(a,low+1,ds);
+    }
+
+    //printing the power set of a char array
+    static void StringSet(char[] s,int low,List<Character> ds)
+    {
+        if(low == s.length)
+        {
+            System.out.println(ds);
+            return;
+        }
+
+        ds.add(s[low]);
+        StringSet(s,low+1,ds);
+        ds.remove(ds.size()-1);
+        StringSet(s,low+1,ds);
+    }
+
+
+    public static void main(String[] args)
+    {
+        int []a = {1,2,3,4};
+        List<Integer> ds = new ArrayList<>();
+        powerSet(a,0,ds);
+
+        char[] c = {'a','b','c'};
+        List<Character> cha = new ArrayList<>();
+        StringSet(c,0,cha);
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+class leetCode
+{
+    void combiSum(int []a, int target,int ind, List<List<Integer>> ans,List ds)
+    {
+        if(ind == a.length)
+        {
+            if(target == 0)
+            {
+                ans.add(new ArrayList<>(ds));
+            }
+            return;
+        }
+        if(a[ind] <= target)
+        {
+            ds.add(a[ind]);
+            combiSum(a,target-a[ind],ind,ans,ds);
+            ds.remove(ds.size()-1);
+        }
+        combiSum(a,target,ind+1,ans,ds);
+    }
+
+    int combiSum2(int []a, int target,int ind, List<List<Integer>> ans,List ds,int s)
+    {
+        if(ind == a.length)
+        {
+            if(target == s)
+            {
+                ans.add(new ArrayList<>(ds));
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        }
+
+            ds.add(a[ind]);
+            s = s+a[ind];
+            int l= combiSum2(a,target,ind+1,ans,ds,s);
+            ds.remove(ds.size()-1);
+            s = s- a[ind];
+            int r= combiSum2(a,target,ind+1,ans,ds,s);
+
+            return l+r;
+    }
+
+    //medium no 39 - find the combinational sum of an array
+    List<List<Integer>> combinationalSum(int []a,int target)
+    {
+        List<List<Integer>> ans = new ArrayList<>();
+//        combiSum(a,target,0,ans,new ArrayList());
+        combiSum2(a,target,0,ans,new ArrayList(),0);
+        return ans;
+    }
+
+
+}
+public class expert
+{
+    public static void main(String []args)
+    {
+        leetCode lee = new leetCode();
+        int []a = {2,3,5,7};
+        int target = 7;
+        System.out.println(lee.combinationalSum(a,target));
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+class leetcode{
+    void set(int []a,int ind,List<Integer> ans,int sum)
+    {
+        if(ind == a.length)
+        {
+            System.out.println(sum);
+            return;
+        }
+        set(a,ind+1,ans,sum);
+        ans.add(a[ind]);
+        sum = sum + a[ind];
+
+        set(a,ind+1,ans,sum);
+        ans.remove(ans.size()-1);
+        sum = sum - a[ind];
+
+
+    }
+    void powerSum(int []a)
+    {
+        List<Integer> ans = new ArrayList<>();
+        set(a,0,ans,0);
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        int []a = {2,3}; //0 2 3 5
+        leetcode lee = new leetcode();
+        lee.powerSum(a);
+    }
+}*/
+
+
+
+
+
+
+
+
+
 
 
 
