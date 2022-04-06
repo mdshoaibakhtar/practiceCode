@@ -2490,6 +2490,8 @@ class leetcode{
     {
         if(ind == a.length)
         {
+
+            System.out.print(ans+"---->");
             System.out.println(sum);
             return;
         }
@@ -2500,8 +2502,6 @@ class leetcode{
         set(a,ind+1,ans,sum);
         ans.remove(ans.size()-1);
         sum = sum - a[ind];
-
-
     }
     void powerSum(int []a)
     {
@@ -2511,11 +2511,60 @@ class leetcode{
 }
 public class expert {
     public static void main(String[] args) {
-        int []a = {2,3}; //0 2 3 5
+        int []a = {1,2,2}; //0 2 3 5
         leetcode lee = new leetcode();
         lee.powerSum(a);
     }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+public class expert
+{
+    static void uniqueSubset(int []a,int ind,List<Integer> ds,List<List<Integer>> ans)
+    {
+//        if(ind == a.length)
+//        {
+//            ans.add(new ArrayList<>(ds));
+//            return;
+//        }
+//        ds.add(a[ind]);
+//        uniqueSubset(a,ind+1,ds,ans);
+//        ds.remove(ds.size()-1);
+//        uniqueSubset(a,ind+1,ds,ans);
+
+
+        //unique subset
+        ans.add(new ArrayList<>(ds));
+        for(int i=ind;i<a.length;i++)   //
+        {
+            if(i != ind && a[i] == a[i-1])continue;
+            ds.add(a[i]);
+            uniqueSubset(a,i+1,ds,ans);
+            ds.remove(ds.size()-1);
+        }
+    }
+     static List<List<Integer>>  findingUniqueSubset(int []a)
+    {
+        List<List<Integer>> ans = new ArrayList<>();
+        uniqueSubset(a,0,new ArrayList<>(),ans);
+        return ans;
+
+    }
+    public static void main(String[] args)
+    {
+        int []a = {1,2,2};
+        System.out.println(findingUniqueSubset(a));
+    }
 }*/
+package com.practiceCode;
+public class expert
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Kya Kru Main");
+    }
+}
 
 
 
