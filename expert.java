@@ -2556,15 +2556,71 @@ public class expert
         int []a = {1,2,2};
         System.out.println(findingUniqueSubset(a));
     }
-}*/
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+
+public class expert
+{
+    static void permutation(int []a,int ind,List<List<Integer>> ans)
+    {
+        if(ind == a.length)
+        {
+            List<Integer> ds = new ArrayList<>();
+            for(int i=0;i<a.length;i++)
+            {
+                ds.add(a[i]);
+            }
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+
+        for(int i=ind;i<a.length;i++)
+        {
+            swap(i,ind,a);
+            permutation(a,ind+1,ans);
+            swap(i,ind,a);
+        }
+    }
+
+    static void swap(int i,int j,int []a)
+    {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+    }
+    static List<List<Integer>> findPermutation(int []a)
+    {
+        List<List<Integer>> ans = new ArrayList<>();
+        permutation(a,0,ans);
+        return ans;
+    }
+    public static void main(String[] args)
+    {
+        int []a = {1,2,3};
+        System.out.println(findPermutation(a));
+    }
+}
 package com.practiceCode;
 public class expert
 {
     public static void main(String[] args)
     {
-        System.out.println("Kya Kru Main");
+        int n = 14;int m=1;int bin=0;
+        String s= "";
+        //Here we are Finding The Binary Value Of n
+        while (n != 0)
+        {
+             int rem = n % 2;
+             bin = bin + (rem*m);
+             m = m*10;
+             n = n /2;
+        }
+
+        System.out.println(bin);
     }
-}
+}*/
 
 
 
