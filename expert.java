@@ -2620,14 +2620,320 @@ public class expert
 
         System.out.println(bin);
     }
+}
+//121 Stock Problem
+package com.practiceCode;
+public class expert
+{
+    static void stockPrice(int []pr)
+    {
+        int pro = 0;
+        int curr = 0;
+
+        for(int i=0;i<pr.length;i++)
+        {
+            for(int j=i;j<pr.length;j++)
+            {
+                if((pr[j]-pr[i]) > curr && (pr[j]-pr[i]) > pro)
+                {
+                    pro = (pr[j]-pr[i]);
+                }else {
+                    curr = pr[j]-pr[i];
+                }
+            }
+        }
+        System.out.println(pro);
+
+    }
+
+    public static void main(String[] args)
+    {
+        int []prices = {9,8,8,9,8,7,8,8};
+        stockPrice(prices);
+    }
+}
+package com.practiceCode;
+public class expert
+{
+    public static void main(String[] args)
+    {
+        String s = "one double five three four";
+        boolean doub = false;
+        boolean triple = false;
+        String p ="";
+        String []str  = s.split(" ");
+        for(int i=0;i<str.length;i++)
+        {
+            if(str[i].equals("one") && !doub && !triple)
+            {
+                p = p + "1";
+            }
+            if(str[i].equals("two") && !doub && !triple)
+            {
+                p = p + "2";
+            }
+            if(str[i].equals("three") && !doub && !triple)
+            {
+                p = p + "3";
+            }
+            if(str[i].equals("four") && !doub && !triple)
+            {
+                p = p + "4";
+            }
+            if(str[i].equals("five") && !doub && !triple)
+            {
+                p = p + "5";
+            }
+            if(str[i].equals("six") && !doub && !triple)
+            {
+                p = p + "6";
+            }if(str[i].equals("seven") && !doub && !triple)
+            {
+                p = p + "7";
+            }if(str[i].equals("eight")&& !doub && !triple)
+            {
+                p = p + "8";
+            }if(str[i].equals("nine") && !doub && !triple)
+            {
+                p = p + "9";
+            }if(str[i].equals("zero") && !doub && !triple)
+            {
+                p = p + "0";
+            }
+
+            if(str[i].equals("double"))
+            {
+                doub = true;
+                continue;
+            } if(str[i].equals("triple"))
+            {
+                triple = true;
+                continue;
+            }
+
+            if(str[i].equals("one") && doub)
+            {
+                p = p + "11";
+                doub = false;
+            }
+            if(str[i].equals("two") && doub)
+            {
+                p = p + "22";
+                doub = false;
+            }
+            if(str[i].equals("three") && doub)
+            {
+                p = p + "33";doub = false;
+            }
+            if(str[i].equals("four") && doub)
+            {
+                p = p + "44";doub = false;
+            }
+            if(str[i].equals("five") && doub)
+            {
+                p = p + "55";doub = false;
+            }
+            if(str[i].equals("six") && doub)
+            {
+                p = p + "66";doub = false;
+            }if(str[i].equals("seven") && doub)
+        {
+            p = p + "77";doub = false;
+        }if(str[i].equals("eight")&& doub)
+        {
+            p = p + "88";doub = false;
+        }if(str[i].equals("nine") && doub)
+        {
+            p = p + "99";doub = false;
+        }if(str[i].equals("zero") && doub)
+        {
+            p = p + "00";doub = false;
+        }
+
+
+
+            if(str[i].equals("one") && triple)
+            {
+                p = p + "111";
+                triple = false;
+            }
+            if(str[i].equals("two") && triple)
+            {
+                p = p + "222";
+                triple = false;
+            }
+            if(str[i].equals("three") && triple)
+            {
+                p = p + "333";triple = false;
+            }
+            if(str[i].equals("four") && triple)
+            {
+                p = p + "444";triple = false;
+            }
+            if(str[i].equals("five") && triple)
+            {
+                p = p + "555";triple = false;
+            }
+            if(str[i].equals("six") && triple)
+            {
+                p = p + "666";triple = false;
+            }if(str[i].equals("seven") && triple)
+        {
+            p = p + "777";triple = false;
+        }if(str[i].equals("eight")&& triple)
+        {
+            p = p + "888";triple = false;
+        }if(str[i].equals("nine") && triple)
+        {
+            p = p + "999";triple = false;
+        }if(str[i].equals("zero") && triple)
+        {
+            p = p + "000";triple = false;
+        }
+        }
+
+        System.out.println(p);
+    }
+}
+package com.practiceCode;
+public class expert
+{
+    static void traversal(int [][]arr)
+    {
+        for(int i =0;i<arr.length;i++)
+        {
+            for(int j=0;j<arr[0].length;j++)
+            {
+                System.out.print(arr[i][j]+"  ");
+            }
+            System.out.println();
+        }
+    }
+    static void rotation(int [][]a)
+    {
+        int row = a.length;
+        int col = a[0].length;
+        for(int i=0;i<row-1;i++)
+        {
+            for(int j=i+1;j<col;j++)
+            {
+                int temp = a[i][j];
+                a[i][j] = a[j][i];
+                a[j][i] = temp;
+            }
+        }
+//        7  4  1
+//        8  5  2-----
+//        3  6  9
+
+
+        for(int i=0;i<row;i++)   //temp = 2          //n = 2
+        {
+            int n = a.length-1;
+            if(n%2==0)
+            {
+                for(int j=0;j<=n/2-1;j++)
+                {
+                    int temp = a[i][j];
+                    a[i][j] = a[i][n];
+                    a[i][n] = temp;
+                    n--;
+                }
+            }
+            else {
+                for(int j=0;j<n/2+1;j++)
+                {
+                    int temp = a[i][j];
+                    a[i][j] = a[i][n];
+                    a[i][n] = temp;
+                    n--;
+                }
+            }
+        }
+        traversal(a);
+    }
+    public static void main(String[] args)
+    {
+        int [][]a = {{1, 2, 3},
+                     {4, 5, 6},
+                     {7, 8, 9}};
+
+
+//        int [][]a = {{1, 2, 3,4},
+//                     {5, 6, 7,8},
+//                     {9, 10, 11,12},
+//                     {13, 14, 15,16}};
+        traversal(a);
+        System.out.println("After Rotation of 90 Degree");
+        rotation(a);
+    }
 }*/
+//Best time to buy and sell stock for maximum profit
+package com.practiceCode;
+
+import java.util.Map;
+
+public class expert
+{
+    static void stockExchange(int []p)
+    {
+        //Brute force
+//        int profit = 0;
+//        for(int i=0;i<p.length;i++)
+//        {
+//            for(int j=i+1;j<p.length;j++)
+//            {
+//                if(p[i]<p[j] && p[j]-p[i]>profit)
+//                {
+//                    profit = p[j]-p[i];
+//                }
+//            }
+//        }
+//        System.out.println(profit);
+
+
+        //optimal solution
+        int minsofar = p[0];
+        int profit = 0;
+        for(int i=0;i<p.length;i++)
+        {
+            minsofar = Math.min(minsofar,p[i]);
+            int pro = p[i]-minsofar;
+            profit = Math.max(profit,pro);
+        }
+        System.out.println(profit);
+    }
+
+    static int recSol(int []a,int ind,int profit)
+    {
+        if(ind == a.length-1)
+        {
+            return profit;
+        }
+        for(int i=ind+1;i<a.length;i++)
+        {
+            if(a[i] > a[ind] && a[i]-a[ind]>profit)
+            {
+                profit = a[i]-a[ind];
+            }
+        }
+        return recSol(a,ind+1,profit);
+    }
+    public static void main(String[] args)
+    {
+        int []prices = {7,1,5,3,6,4};
+//        stockExchange(prices);
+        System.out.println(recSol(prices,0,0));
+    }
+}
 
 
 
 
 
-
-
+intpur = [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
+output  = [[21,6,11,16,1],[22,7,12,17,2],[23,8,13,18,3],[24,9,14,19,4],[25,10,15,20,5]]
+expected = [[21,16,11,6,1],[22,17,12,7,2],[23,18,13,8,3],[24,19,14,9,4],[25,20,15,10,5]]
 
 
 
