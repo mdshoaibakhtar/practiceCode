@@ -2795,84 +2795,9 @@ public class expert
         System.out.println(p);
     }
 }
-package com.practiceCode;
-public class expert
-{
-    static void traversal(int [][]arr)
-    {
-        for(int i =0;i<arr.length;i++)
-        {
-            for(int j=0;j<arr[0].length;j++)
-            {
-                System.out.print(arr[i][j]+"  ");
-            }
-            System.out.println();
-        }
-    }
-    static void rotation(int [][]a)
-    {
-        int row = a.length;
-        int col = a[0].length;
-        for(int i=0;i<row-1;i++)
-        {
-            for(int j=i+1;j<col;j++)
-            {
-                int temp = a[i][j];
-                a[i][j] = a[j][i];
-                a[j][i] = temp;
-            }
-        }
-//        7  4  1
-//        8  5  2-----
-//        3  6  9
 
-
-        for(int i=0;i<row;i++)   //temp = 2          //n = 2
-        {
-            int n = a.length-1;
-            if(n%2==0)
-            {
-                for(int j=0;j<=n/2-1;j++)
-                {
-                    int temp = a[i][j];
-                    a[i][j] = a[i][n];
-                    a[i][n] = temp;
-                    n--;
-                }
-            }
-            else {
-                for(int j=0;j<n/2+1;j++)
-                {
-                    int temp = a[i][j];
-                    a[i][j] = a[i][n];
-                    a[i][n] = temp;
-                    n--;
-                }
-            }
-        }
-        traversal(a);
-    }
-    public static void main(String[] args)
-    {
-        int [][]a = {{1, 2, 3},
-                     {4, 5, 6},
-                     {7, 8, 9}};
-
-
-//        int [][]a = {{1, 2, 3,4},
-//                     {5, 6, 7,8},
-//                     {9, 10, 11,12},
-//                     {13, 14, 15,16}};
-        traversal(a);
-        System.out.println("After Rotation of 90 Degree");
-        rotation(a);
-    }
-}*/
 //Best time to buy and sell stock for maximum profit
 package com.practiceCode;
-
-import java.util.Map;
-
 public class expert
 {
     static void stockExchange(int []p)
@@ -2926,15 +2851,169 @@ public class expert
         System.out.println(recSol(prices,0,0));
     }
 }
+package com.practiceCode;
+public class expert
+{
+    static void traversal(int [][]arr)
+    {
+        for(int i =0;i<arr.length;i++)
+        {
+            for(int j=0;j<arr[0].length;j++)
+            {
+                System.out.print(arr[i][j]+"  ");
+            }
+            System.out.println();
+        }
+    }
+    static void swap(int [][]a,int i,int j){
+        int temp = a[i][j];
+        a[i][j] = a[j][i];
+        a[j][i] = temp;
+    }
+    static void rotation(int [][]a)
+    {
+        int row = a.length;
+        int col = a[0].length;
+        for(int i=0;i<row-1;i++)
+        {
+            for(int j=i+1;j<col;j++)
+            {
+                swap(a,i,j);
+            }
+        }
+//        1  4  7
+//        2  5  8
+//        3  6  9
+        for(int i=0;i<row;i++)
+        {
+            int p = col-1;
+            if(p %2 !=0)
+            {
+                for(int j=0;j<=(p/2)+1;j++)//2
+                {
+                    int temp = a[i][j];
+                    a[i][j] = a[i][p];
+                    a[i][p] = temp;
+                    p--;
+                }
+            }else
+            {
+                for(int j=0;j<=(p/2);j++)//2
+                {
+                    int temp = a[i][j];
+                    a[i][j] = a[i][p];
+                    a[i][p] = temp;
+                    p--;
+                }
+            }
+        }
+        traversal(a);
+    }
+    public static void main(String[] args)
+    {
+        int [][]a = {{1,2,3},{4,5,6},{7,8,9}};
+//        int [][]a = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
+//        int [][]a = {{1,2,3,4,5},{6,7,8,9,10},{11,12,13,14,15},{16,17,18,19,20},{21,22,23,24,25}};
+//        int [][]a = {{1,2,3,4,5,8},{6,7,8,9,10,6},{11,12,13,14,15,7},{16,17,18,19,20,9},{21,22,23,24,25,3},{3,65,23,24,25,3}};
+        traversal(a);
+        System.out.println("After Rotation of 90 Degree");
+        rotation(a);
+    }
+}
+//merge tow sorted array
+//88 merge sorted array
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+public class expert
+{
+    static void merge(int []a,int []b)
+    {
+        List<Integer> list = new ArrayList();
+        int i=0;int j=0;int l1 = a.length;int l2 = b.length;
+       while(i<l1 && j<l2)
+       {
+           if(a[i]<b[j])
+           {
+               list.add(a[i]);
+               i++;
+           }else {
+               list.add(b[j]);
+               j++;
+           }
+       }
 
+       while(i<l1)
+       {
+           list.add(a[i]);
+           i++;
+       }
+       while(j<l2)
+       {
+           list.add(b[j]);
+           j++;
+       }
+        System.out.println(list);
 
+    }
+    public static void main(String[] args)
+    {
+        int []a = {1,2,6};
+        int []b = {2,2,3,9};
+        merge(a,b);
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
 
+public class expert
+{
+    static boolean isPalindrome(String s,int low,int high)
+    {
+        boolean check = true;
+        while(low<=high)
+        {
+            if(s.charAt(low)!=s.charAt(high))
+            {
+                return false;
+            }
+            low++;high--;
+        }
+        return check;
+    }
 
+    static void checkPalindromic(String s,int ind,List<List<String>> ans,List<String> ds)
+    {
+        if(ind == s.length())
+        {
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+        for(int i=ind;i<s.length();i++)
+        {
+            if(isPalindrome(s,ind,i))
+            {
+                ds.add(s.substring(ind,i+1));//here i+1 means i +1 is excluded
+                checkPalindromic(s,i+1,ans,ds);
+                ds.remove(ds.size()-1);
+            }
+        }
+    }
 
-intpur = [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15],[16,17,18,19,20],[21,22,23,24,25]]
-output  = [[21,6,11,16,1],[22,7,12,17,2],[23,8,13,18,3],[24,9,14,19,4],[25,10,15,20,5]]
-expected = [[21,16,11,6,1],[22,17,12,7,2],[23,18,13,8,3],[24,19,14,9,4],[25,20,15,10,5]]
-
+    static void partitioning(String s)
+    {
+        List<List<String>> ans = new ArrayList<>();
+        List<String> ds = new ArrayList<>();
+        checkPalindromic(s,0,ans,ds);
+        System.out.println(ans);
+    }
+    public static void main(String[] args)
+    {
+        String s = "aabb";
+        partitioning(s);
+    }
+}*/
 
 
 
