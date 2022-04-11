@@ -2878,12 +2878,11 @@ public class expert
         {
             for(int j=i+1;j<col;j++)
             {
-                swap(a,i,j);
+                int temp = a[i][j];
+                a[i][j] = a[j][i];
+                a[j][i] = temp;
             }
         }
-//        1  4  7
-//        2  5  8
-//        3  6  9
         for(int i=0;i<row;i++)
         {
             int p = col-1;
@@ -3012,6 +3011,101 @@ public class expert
     {
         String s = "aabb";
         partitioning(s);
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+
+public class expert
+{
+    static void recursiveIteration(int []a,int ind)
+    {
+        if(ind == a.length){
+            return;
+        }
+        System.out.print(a[ind]+"  ");
+        recursiveIteration(a,ind+1);
+    }
+    static int linearSearch(int []a,int elem,int low,int high)
+    {
+        int ind=-1;
+        if(low <= high)
+        {
+            if(a[low] == elem)
+            {
+                return low;
+            }
+            if(a[high] == elem)
+            {
+                return high;
+            }else {
+                 ind=linearSearch(a,elem,low+1,high-1);
+            }
+        }
+        return ind;
+    }
+
+    static int linearSearch(int []a,int elem,int n)
+    {
+        for(int i=0;i<n;i++)
+        {
+            if(a[i] == elem)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static int recbinarySearch(int []a,int elem,int low,int high)
+    {
+        int mid = (low+high)/2;
+        if(low<=high)
+        {
+            if(a[mid] == elem)
+            {
+                return mid;
+            }
+            if(a[mid] >= elem)
+            {
+                return recbinarySearch(a,elem,low,mid);
+            }
+            if(a[mid]<elem)
+            {
+                return recbinarySearch(a,elem,mid+1,high);
+            }
+        }
+        return -1;
+    }
+
+    static void recursiveIteration(int [][]a,int row,int col)
+    {
+        if(a.length==row && a[0].length==col)
+        {
+            return;
+        }
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[row][i]==2)
+            {
+                System.out.println("milgya at "+row +" "+i);
+            }
+        }
+//        System.out.println();
+        recursiveIteration(a,row+1,col+1);
+    }
+
+    public static void main(String []args)
+    {
+//        int []m = {1,2,3,3,4,5};int elem = 6;
+//        recursiveIteration(m,0);
+//        System.out.println("Below..........");
+//        System.out.println("\n"+linearSearch(m,elem,0,m.length-1));
+//        System.out.println(linearSearch(m,elem,m.length));
+//        System.out.println(recbinarySearch(m,elem,0,m.length-1));
+        int [][]a= {{1,2,3},{4,5,6},{7,8,9}};
+        recursiveIteration(a,0,0);
     }
 }*/
 
