@@ -2865,45 +2865,32 @@ public class expert
             System.out.println();
         }
     }
-    static void swap(int [][]a,int i,int j){
-        int temp = a[i][j];
-        a[i][j] = a[j][i];
-        a[j][i] = temp;
-    }
-    static void rotation(int [][]a)
+
+    static int[][] transPose(int [][]a)
     {
-        int row = a.length;
-        int col = a[0].length;
-        for(int i=0;i<row-1;i++)
-        {
-            for(int j=i+1;j<col;j++)
-            {
+
+        int r = a.length;
+        int c = a[0].length;
+        for(int i=0;i<r;i++)
+            for(int j=i;j<c;j++){ //temp = 2
                 int temp = a[i][j];
                 a[i][j] = a[j][i];
                 a[j][i] = temp;
             }
-        }
+        return a;
+    }
+    static void rotation(int [][]a)   //temp = 4
+    {
+        transPose(a);
+        int row = a.length;
+        int col = a[0].length;
         for(int i=0;i<row;i++)
         {
-            int p = col-1;
-            if(p %2 !=0)
+            for(int j=0;j<(col/2);j++)
             {
-                for(int j=0;j<=(p/2)+1;j++)//2
-                {
-                    int temp = a[i][j];
-                    a[i][j] = a[i][p];
-                    a[i][p] = temp;
-                    p--;
-                }
-            }else
-            {
-                for(int j=0;j<=(p/2);j++)//2
-                {
-                    int temp = a[i][j];
-                    a[i][j] = a[i][p];
-                    a[i][p] = temp;
-                    p--;
-                }
+                int temp = a[i][j];
+                a[i][j] = a[i][col-1-j];
+                a[i][col-1-j] = temp;
             }
         }
         traversal(a);
@@ -2916,6 +2903,7 @@ public class expert
 //        int [][]a = {{1,2,3,4,5,8},{6,7,8,9,10,6},{11,12,13,14,15,7},{16,17,18,19,20,9},{21,22,23,24,25,3},{3,65,23,24,25,3}};
         traversal(a);
         System.out.println("After Rotation of 90 Degree");
+//        transPose(a);
         rotation(a);
     }
 }
@@ -3107,7 +3095,84 @@ public class expert
         int [][]a= {{1,2,3},{4,5,6},{7,8,9}};
         recursiveIteration(a,0,0);
     }
+}
+package com.practiceCode;
+import java.util.HashSet;
+import java.util.Set;
+public class expert
+{
+    static boolean duplicate(int []a)
+    {
+        HashSet<Integer> s = new HashSet<>();
+        for(int i:a)
+            if(!(s.add(i)))
+                return true;
+        return false;
+    }
+    public static void main(String[] args)
+    {
+        int []n = {1,2,3,4,5,7};
+        System.out.println(duplicate(n));
+    }
+}
+//template's
+package com.practiceCode;
+public class expert {
+    public static void main(String[] args) {
+        System.out.println("Template's..........");
+    }
+}
+
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+
+public class expert {
+    static void twoSum(int []a,int target){
+        //brute force solution
+        boolean flag = false;
+        int []s = new int[2];
+        for(int i=0;i<a.length;i++)
+            if(!flag)
+                for(int j=0;j<a.length;j++)
+                    if(i != j && a[i]+a[j]==target){
+                        s[0]=i;
+                        s[1]=j;
+                        flag=true;
+                        break;
+                    }
+        System.out.println("BruteForce Solution:"+s[0]+" "+s[1]);
+
+    }
+    static void twoSum(int []a, int sum, int target, int ind, List<Integer> ans){
+        if(ind == a.length || sum == target) {
+            System.out.println(ans);
+            return;
+        }
+
+        if(a[ind]<=target)
+        {
+            ans.add(ind);
+            twoSum(a, sum + a[ind], target, ind + 1, ans);
+        }
+
+    }
+    public static void main(String[] args) {
+        System.out.println("Two Sum..........");
+        int []a = {2,3,4,5,7,9};
+        int target = 5;
+//        twoSum(a,target);
+        twoSum(a,0,5,0,new ArrayList<>());
+    }
 }*/
+
+
+
+
+
+
+
+
 
 
 
