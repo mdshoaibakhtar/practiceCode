@@ -2914,40 +2914,39 @@ import java.util.ArrayList;
 import java.util.List;
 public class expert
 {
-    static void merge(int []a,int []b)
+    static void merge(int []nums1,int m,int []nums2,int n)
     {
-        List<Integer> list = new ArrayList();
-        int i=0;int j=0;int l1 = a.length;int l2 = b.length;
-       while(i<l1 && j<l2)
-       {
-           if(a[i]<b[j])
-           {
-               list.add(a[i]);
-               i++;
-           }else {
-               list.add(b[j]);
-               j++;
-           }
-       }
+        int i=m-1;int j=n-1;int k=m+n-1;
+        while(i>=0 || j>=0){
+            if(i<0){
+                nums1[k] = nums2[j];
+                k--;j--;
+            }
+            else if(j<0){
+                nums1[k] = nums1[i];
+                k--;i--;
+            }
+            else if(nums1[i]>nums2[j]){
+                nums1[k] = nums1[i];
+                k--;i--;
+            }
+            else{
+                nums1[k] = nums2[j];
+                k--;j--;
+            }
+        }
 
-       while(i<l1)
-       {
-           list.add(a[i]);
-           i++;
-       }
-       while(j<l2)
-       {
-           list.add(b[j]);
-           j++;
-       }
-        System.out.println(list);
+        for(int l=0;l<m+n;l++){
+            System.out.print(nums1[l]+" ");
+        }
 
     }
     public static void main(String[] args)
     {
-        int []a = {1,2,6};
-        int []b = {2,2,3,9};
-        merge(a,b);
+        int []a = {1,2,3,0,0,0};
+        int []b = {2,5,6};
+        int m=3;int n=3;
+        merge(a,m,b,n);
     }
 }
 package com.practiceCode;
@@ -3122,7 +3121,6 @@ public class expert {
         System.out.println("Template's..........");
     }
 }
-
 package com.practiceCode;
 import java.util.ArrayList;
 import java.util.List;
@@ -3144,30 +3142,163 @@ public class expert {
         System.out.println("BruteForce Solution:"+s[0]+" "+s[1]);
 
     }
-    static void twoSum(int []a, int sum, int target, int ind, List<Integer> ans){
-        if(ind == a.length || sum == target) {
-            System.out.println(ans);
-            return;
-        }
-
-        if(a[ind]<=target)
+    static int twoSum(int []a, int sum, int target, int ind, List<Integer> ans,boolean flag){
+        if(ind == a.length)
         {
-            ans.add(ind);
-            twoSum(a, sum + a[ind], target, ind + 1, ans);
+          if(target == sum && !flag){
+              System.out.println(ans);
+              flag = true;
+              return 1;
+          }
+          return 0;
         }
-
+        int l=0;int r=0;
+           if(!flag)
+           {
+               ans.add(a[ind]);
+               sum += a[ind];
+                l = twoSum(a, sum, target, ind+1 , ans,flag);
+               ans.remove(ans.size()-1);
+               sum -= a[ind];
+                r = twoSum(a, sum, target, ind + 1, ans,flag);
+           }
+//        System.out.println(l+r);
+        return l+r;
     }
     public static void main(String[] args) {
         System.out.println("Two Sum..........");
-        int []a = {2,3,4,5,7,9};
-        int target = 5;
-//        twoSum(a,target);
-        twoSum(a,0,5,0,new ArrayList<>());
+        int []a = {3,2,4,5,6,2};
+        int target = 8;
+        System.out.println(twoSum(a,0,target,0,new ArrayList<>(),false));
+    }
+}
+
+//50 x^n (x to the power of n)
+package com.practiceCode;
+public class expert {
+    static double power(int x,int n){
+        //bruteForce solution
+        double sol = 1;
+        if(n == 0){
+            sol = x;
+            return sol;
+        }
+        if(n < 0){
+            n = -1*n;
+            for(int i=0;i<n;i++){
+                sol =(double)(sol * (double)1/x);
+            }
+        return sol;
+        }
+        if(n > 1){
+            for(int i=0;i<n;i++){
+                sol = sol * x;
+            }
+        }
+        return sol;
+    }
+    public static void main(String[] args) {
+        int x = 3;int n=-2;
+        System.out.println(power(x,n));
+    }
+}
+//search in a 2D matrix
+package com.practiceCode;
+public class expert {
+    static void searchingInMatrix(int [][]mat,int target){
+        //brute force solution
+        for(int i=0;i< mat.length;i++){
+            for(int j=mat[0].length-1;j>=0;j--){
+                if(target > mat[i][j]){
+                    break;
+                }else {
+                    if(target == mat[i][j]){
+                        System.out.println("mil gya: "+i+" "+j);break;
+                    }
+                }
+            }
+        }
+    }
+
+    static void recursiveSearch(int [][]mat,int target,int row,int col){
+
+    }
+    public static void main(String[] args) {
+        int [][]mat = {{1,2,3},
+                       {4,5,6},
+                       {7,8,9}};
+        int target = 10;
+        searchingInMatrix(mat,target);
+    }
+}
+//reshape the matrix
+package com.practiceCode;
+public class expert {
+    static void reshapeTheMatrix(int [][]m,int r,int c){
+        int [][]ans = new int[r][c];int col = c;
+        if(m.length==1) {
+            System.out.println("already in the shape");
+            return;
+        }
+
+        else if(m.length == r && m[0].length==c) {
+            System.out.println("Dont change it");
+            return;
+        }
+
+        else{
+            for(int i=m.length-1;i>=0;i--){
+                for(int j=m[0].length-1;j>=0;j--){
+                        ans[r-1][c-1] = m[i][j];
+                        c--;
+                    }
+                }
+            }
+        for(int i=0;i<r;i++){
+            for(int j=0;j<col;j++){
+                System.out.print(ans[i][j]+" ");
+            }
+        }
+    }
+    public static void main(String[] args) {
+        int [][]m = {{1,2},{3,5}};
+        int r = 1;int c= 4;
+//        System.out.println(m.length);
+//        System.out.println(m[0].length);
+        reshapeTheMatrix(m,r,c);
+    }
+}
+//intersection of two arrays
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+public class expert {
+    static void intersection(int []a,int []b){
+        List<Integer> lst = new ArrayList<>();
+        int k=0;int []c = new int[Math.min(a.length,b.length)];
+        int count=0;
+        for(int i=0;i<a.length;i++){
+            for(int j=0;j<b.length;j++){
+                if(a[i]==b[j]){
+                    lst.add(a[i]);
+                    c[k] = a[i];k++;
+                    count++;
+                    break;
+                }
+            }
+        }
+        System.out.println(lst);
+        for(int i=0;i<count;i++){
+            System.out.print(c[i]+" ");
+        }
+    }
+    public static void main(String[] args) {
+        int []a={1,2,2,1,5,4,9,0};int []b={2,2,2,3,0,8,9,4,9,5};
+        intersection(a,b);
     }
 }*/
-
-
-
+//valid anagram
 
 
 
