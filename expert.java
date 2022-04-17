@@ -127,7 +127,7 @@ public class expert
     }
 }
 //LeetCode-242
-package code.solution;
+package com.practiceCode;
 public class expert
 {
     static boolean isAnagram(String s,String t)
@@ -169,13 +169,12 @@ public class expert
     }
     public static void main(String []args)
     {
-        String s = "car";
-        String t = "rat";
+        String s = "aacc";
+        String t = "ccac";
         System.out.println(isAnagram(s,t));
 
     }
 }
-
 //LeetCode - 389
 package code.solution;
 public class expert
@@ -3219,10 +3218,6 @@ public class expert {
             }
         }
     }
-
-    static void recursiveSearch(int [][]mat,int target,int row,int col){
-
-    }
     public static void main(String[] args) {
         int [][]mat = {{1,2,3},
                        {4,5,6},
@@ -3236,7 +3231,11 @@ package com.practiceCode;
 public class expert {
     static void reshapeTheMatrix(int [][]m,int r,int c){
         int [][]ans = new int[r][c];int col = c;
-        if(m.length==1) {
+        if(r*c != m.length*m[0].length){
+            System.out.println("illegal");
+            return;
+        }
+        if(m.length==1){
             System.out.println("already in the shape");
             return;
         }
@@ -3250,10 +3249,10 @@ public class expert {
             for(int i=m.length-1;i>=0;i--){
                 for(int j=m[0].length-1;j>=0;j--){
                         ans[r-1][c-1] = m[i][j];
-                        c--;
-                    }
+                         c--;
                 }
-            }
+              }
+           }
         for(int i=0;i<r;i++){
             for(int j=0;j<col;j++){
                 System.out.print(ans[i][j]+" ");
@@ -3262,9 +3261,7 @@ public class expert {
     }
     public static void main(String[] args) {
         int [][]m = {{1,2},{3,5}};
-        int r = 1;int c= 4;
-//        System.out.println(m.length);
-//        System.out.println(m[0].length);
+        int r = 4;int c= 1;
         reshapeTheMatrix(m,r,c);
     }
 }
@@ -3284,8 +3281,7 @@ public class expert {
                     lst.add(a[i]);
                     c[k] = a[i];k++;
                     count++;
-                    break;
-                }
+                    break;}
             }
         }
         System.out.println(lst);
@@ -3298,9 +3294,6 @@ public class expert {
         intersection(a,b);
     }
 }*/
-//valid anagram
-
-
 
 
 
