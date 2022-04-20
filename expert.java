@@ -3293,8 +3293,293 @@ public class expert {
         int []a={1,2,2,1,5,4,9,0};int []b={2,2,2,3,0,8,9,4,9,5};
         intersection(a,b);
     }
-}*/
+}
+//striver sde sheet solution
+//73 - set matrix zero's
+package com.practiceCode;
+class solution{
+    void traversal(int [][]arr){
+        for(int i=0;i<arr.length;i++){
+            for(int j =0;j<arr.length;j++){
+                System.out.print(arr[i][j]+" ");
+            }
+            System.out.println("");
+        }
+        System.out.println();
+    }
 
+    //brute force solution
+    void setMatrixZero(int [][]mat){
+        System.out.println("Before, setting it zero");
+        traversal(mat);
+        boolean []r = new boolean[mat.length];
+        boolean []c = new boolean[mat[0].length];
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(mat[i][j]==0){
+                    r[i] = true;
+                    c[j] = true;
+                }
+            }
+        }
+        //setting the zero
+        int p=0;int l =0;
+        for(int i=0;i< mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                if(r[i] || c[j]){
+                    mat[i][j] = 0;
+                }
+            }
+        }
+        System.out.println("After, setting it zero");
+        traversal(mat);
+    }
+
+    //optimal solution
+    void setZero(int [][]mat){
+        int x=-1;int y=-1;
+        for(int i=0;i<mat.length;i++){
+            if(mat[i][0]==0) y=0;
+            for(int j=0;j<mat[0].length;j++){
+                if(mat[i][j]==0){
+                    mat[0][j]=mat[i][0]=0;
+                }
+            }
+        }
+
+        for(int i=mat.length-1;i>=0;i--){
+            for(int j=mat[0].length-1;j>=0;j--){
+                if(mat[i][0]==0 || mat[0][j]==0){
+                    mat[i][j] = 0;
+                }
+                if(y==0){
+                    mat[i][0]=0;
+                }
+            }
+        }
+
+        traversal(mat);
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        int [][]matrix =   {{1, 2, 3},
+                            {4, 0, 6},
+                            {7, 8, 9}};
+                            [[0,1,2,0],[3,4,5,2],[1,3,1,5]]
+                           expected : [[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+
+
+        solution sol = new solution();
+//        sol.setMatrixZero(matrix);
+        sol.setZero(matrix);
+    }
+}
+//permutation
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+class solution{
+    void traversal(int []a){
+        for(int i:a)
+            System.out.print(i+" ");
+    }
+
+    //Brute force solution:
+    // i simply use map to store the status of an element that it is picked or not picked
+    List<List<Integer>> permutation(int []a, List<Integer> ds, List<List<Integer>> ans, boolean []map){
+        if(ds.size() == a.length){
+            ans.add(new ArrayList<>(ds));
+            return ans;
+        }
+        for(int i=0;i<a.length;i++){
+            if(!map[i]){
+                map[i] = true;
+                ds.add(a[i]);
+                permutation(a,ds,ans,map);
+                ds.remove(ds.size()-1);
+                map[i] = false;
+            }
+        }
+        return ans;
+    }
+
+    void swap(int []a,int x,int y){
+        int temp = a[x];
+        a[x] = a[y];
+         a[y] = temp;
+    }
+
+    //optimal solution of printing all the permutation of a given array
+    List<List<Integer>> recPermutation(int []a,int ind,List<List<Integer>> ans){
+        if(ind == a.length)
+        {
+            List<Integer> ds = new ArrayList<>();
+            for(int i=0;i<a.length;i++)
+            {
+                ds.add(a[i]);
+            }
+            ans.add(new ArrayList<>(ds));
+            return ans;
+        }
+
+        for(int i=ind;i<a.length;i++)
+        {
+            swap(a,ind,i);
+            recPermutation(a,ind+1,ans);
+            swap(a,ind,i);
+        }
+    return ans;
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        int []a = {1,2,3};
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ds= new ArrayList<>();
+        boolean []map = new boolean[a.length];
+        solution sol = new solution();
+//        System.out.println(sol.permutation(a,ds,ans,map));
+        System.out.println(sol.recPermutation(a,0,ans));
+    }
+}
+//next permutation
+package com.practiceCode;
+import java.util.Arrays;
+public class expert {
+
+//    Brute force solution
+//    1.First Find All the possible permutation of an array
+//    2.sort it in increasing order
+//    3.find the index of given array
+//    4.your output would be in the index+1 place
+
+
+    static void swap(int []a,int i,int j){
+        int temp =  a[i];
+        a[i] = a[j] ;
+         a[j] = temp;
+    }
+
+    //optimal solution
+    static void nextPermutation(int a[]){
+        int index1 = 0;int index2 = 0;
+        if(a.length>1){
+            for(int i=a.length-2;i>=0;i--){
+                if(a[i]<a[i+1]){
+                    index1 = i;
+                    break;
+                }
+            }
+            for(int i=a.length-1;i>=0;i--){
+                if(a[index1]<a[i]){
+                    index2 = i;break;
+                }
+            }
+           if(index1>0 || index2>0){
+               swap(a,index1,index2);
+               Arrays.sort(a,index1+1,a.length-1);
+           }else {
+               System.out.println("Simply sort");
+               Arrays.sort(a);
+           }
+            for(int i:a){
+                System.out.print(i+"  ");
+            }
+        }else{
+            System.out.println("Zero size");
+        }
+    }
+    public static void main(String[] args) {
+        int []a = {3,2,1};
+        nextPermutation(a);
+    }
+}*/
+//merge interval
+package com.practiceCode;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class expert {
+
+    //traversal of a intervals
+    static void traversal(int [][]a){
+        for(int i=0;i<a.length;i++){
+            for(int j=0;j<a[0].length;j++){
+                System.out.print(a[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    //swapping the array row
+    static void rawSwap(int [][]a,int i,int j){
+        int temp = a[i][0];
+        a[i][0] = a[j][0];
+        a[j][0] = temp;
+
+        int pemp = a[i][a[0].length-1];
+        a[i][a[0].length-1] = a[j][a[0].length-1];
+        a[j][a[0].length-1] = pemp;
+    }
+
+    //First Sort the intervals
+    static void intervalsSort(int [][]a){
+        for(int i=0;i<a.length;i++){
+            for(int j=0;j<a.length-1;j++){
+                if(a[j][0] > a[j+1][0]){
+                    rawSwap(a,j,j+1);
+                }
+            }
+        }
+        System.out.println("After Sorting");
+        traversal(a);
+    }
+
+    //merge intervals
+    static void mergeIntervals(int [][]a){   //{0,5},{2,6}
+        int col = a[0].length-1;
+        boolean lock = false;
+        List<List<Integer>> ans = new ArrayList<>();
+        for(int i=0;i<a.length-1;i++){
+            List<Integer> ds = new ArrayList<>();
+            if(lock){
+                lock = false;
+                continue;
+            }
+                if(a[i][col] > a[i+1][0] && !lock)
+                {
+                    //swap a[i][col-1] with a[i+1][col-1]
+                    int temp = a[i][col];
+                    a[i][col]  = a[i+1][col];
+                    a[i+1][col] = temp;
+
+                    ds.add(a[i][0]);
+                    ds.add(a[i][col]);
+                    ans.add(new ArrayList<>(ds));
+                    lock = true;
+                }
+                else
+                {
+                    ds.add(a[i][0]);
+                    ds.add(a[i][col]);
+                    ans.add(ds);
+                }
+        }
+        System.out.println("After Merging");
+        System.out.println(ans);
+//        traversal(a);
+    }
+    public static void main(String[] args) {
+        int [][]intervals = {{0,2},{3,6},{7,9},{10,11}};
+//        traversal(intervals);
+//        intervalsSort(intervals);
+        mergeIntervals(intervals);
+    }
+}
 
 
 
