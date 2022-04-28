@@ -3496,91 +3496,102 @@ public class expert {
         int []a = {3,2,1};
         nextPermutation(a);
     }
-}*/
-//merge interval
-package com.practiceCode;
+}
+//50 pow(x,n)/*
 
+/*package com.practiceCode;
+public class expert {
+    //Brute Force : using the inbuilt Math.Pow() Function
+    static void brute_power(double x,int n){
+        double power = 1f;
+        boolean neg = false;
+            if(n < 0){
+                n = n * (-1);neg = true;
+            }
+            if(n == 0 || x==1){
+                System.out.println(1);
+                return;
+            }
+            if(n == 1){
+                System.out.println(x);
+                return;
+            }
+            for(int i=1;i<=n;i++){
+                power = power * x;
+            }
+            if(neg){
+                System.out.println("Lesser Than Zero");
+                power = 1 / power;
+                System.out.println(power);
+            }else {
+                System.out.println("Greater Than Zero");
+                System.out.println(power);
+            }
+    }
+
+    //optimal solution
+    static double opti_power(double x,int n,double p,int ind,boolean neg){
+        if(ind == n){
+            if(neg){
+                System.out.println("n is negative");
+                p = 1 / p;
+            }
+            System.out.println(p);
+            return p;
+        }
+        if(n == 0 || x==1){
+            return 1;
+        }
+        if(n == 1){
+            return x;
+        }
+        p = p * x;
+        return opti_power(x,n,p,ind+1,neg);
+    }
+    public static void main(String[] args) {
+//        0.00001
+//        21474836
+        //in this question, we have an integer x and power n. and our job is to find the value of x raised to the power n.
+        double x = 0.00001;   //number
+        int n = 21446;  //power
+        boolean negative = false;
+        if(n < 0){
+            n = n*(-1);
+            negative = true;
+        }
+//        brute_power(x,n);
+        opti_power(x,n,1,0,negative);
+    }
+}
+*/
+package com.practiceCode;
 import java.util.ArrayList;
 import java.util.List;
-
-public class expert {
-
-    //traversal of a intervals
-    static void traversal(int [][]a){
-        for(int i=0;i<a.length;i++){
-            for(int j=0;j<a[0].length;j++){
-                System.out.print(a[i][j]+" ");
+public class expert
+{
+    static void mergeIntervals(int [][]intervals)
+    {
+        List<int []>res = new ArrayList<>();
+        int []start = intervals[0];
+        int []end = intervals[1];
+        for(int i=0;i< intervals.length;i++)
+        {
+            start = intervals[i];
+            end = intervals[i];
+            for(int j=0;j<intervals[0].length;j++)
+            {
+//                System.out.print(start[j]+"  ");
+                System.out.print(end[j]+"  ");
             }
             System.out.println();
         }
     }
-
-    //swapping the array row
-    static void rawSwap(int [][]a,int i,int j){
-        int temp = a[i][0];
-        a[i][0] = a[j][0];
-        a[j][0] = temp;
-
-        int pemp = a[i][a[0].length-1];
-        a[i][a[0].length-1] = a[j][a[0].length-1];
-        a[j][a[0].length-1] = pemp;
-    }
-
-    //First Sort the intervals
-    static void intervalsSort(int [][]a){
-        for(int i=0;i<a.length;i++){
-            for(int j=0;j<a.length-1;j++){
-                if(a[j][0] > a[j+1][0]){
-                    rawSwap(a,j,j+1);
-                }
-            }
-        }
-        System.out.println("After Sorting");
-        traversal(a);
-    }
-
-    //merge intervals
-    static void mergeIntervals(int [][]a){   //{0,5},{2,6}
-        int col = a[0].length-1;
-        boolean lock = false;
-        List<List<Integer>> ans = new ArrayList<>();
-        for(int i=0;i<a.length-1;i++){
-            List<Integer> ds = new ArrayList<>();
-            if(lock){
-                lock = false;
-                continue;
-            }
-                if(a[i][col] > a[i+1][0] && !lock)
-                {
-                    //swap a[i][col-1] with a[i+1][col-1]
-                    int temp = a[i][col];
-                    a[i][col]  = a[i+1][col];
-                    a[i+1][col] = temp;
-
-                    ds.add(a[i][0]);
-                    ds.add(a[i][col]);
-                    ans.add(new ArrayList<>(ds));
-                    lock = true;
-                }
-                else
-                {
-                    ds.add(a[i][0]);
-                    ds.add(a[i][col]);
-                    ans.add(ds);
-                }
-        }
-        System.out.println("After Merging");
-        System.out.println(ans);
-//        traversal(a);
-    }
-    public static void main(String[] args) {
-        int [][]intervals = {{0,2},{3,6},{7,9},{10,11}};
-//        traversal(intervals);
-//        intervalsSort(intervals);
+    public static void main(String[] args)
+    {
+        int [][]intervals = {{1,3},{2,6},{7,8}};
         mergeIntervals(intervals);
     }
 }
-
 
 
 
