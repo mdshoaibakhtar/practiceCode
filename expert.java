@@ -869,9 +869,8 @@ public class expert
         int n = 3;
         System.out.println(fibonacciSeries(n));
     }
-}*/
+}
 //Sorting
-/*
 1.Bubble Sort
 2.Selection Sort
 3.Insertion Sort
@@ -3563,50 +3562,236 @@ public class expert {
         opti_power(x,n,1,0,negative);
     }
 }
-*/
 package com.practiceCode;
-import java.util.ArrayList;
-import java.util.List;
-public class expert
-{
-    static void mergeIntervals(int [][]intervals)
-    {
-        List<int []>res = new ArrayList<>();
-        int []start = intervals[0];
-        int []end = intervals[1];
-        for(int i=0;i< intervals.length;i++)
-        {
-            start = intervals[i];
-            end = intervals[i];
-            for(int j=0;j<intervals[0].length;j++)
-            {
-//                System.out.print(start[j]+"  ");
-                System.out.print(end[j]+"  ");
-            }
-            System.out.println();
+import java.util.*;
+
+class collection_frameWork{
+    void arrayList(){
+        System.out.print("Hey ! I am from arrayList : ");
+        List<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(40);
+        System.out.println(list);
+
+        list.add(0,786);
+        System.out.println(list);
+
+        list.remove(Integer.valueOf(786));
+        System.out.println(list.remove(Integer.valueOf(786)));
+        System.out.println(list);
+
+        list.set(0,788);
+        System.out.println(list);
+
+        System.out.println(list.contains(788));
+
+        Iterator<Integer> iterator = list.listIterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
         }
+
+        list.clear();
+        System.out.println(list);
     }
-    public static void main(String[] args)
+
+    void stack(){
+        Stack<Integer> stack = new Stack<>();
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+        stack.push(40);
+        System.out.println(stack);
+
+        System.out.println(stack.peek());
+        System.out.println(stack.pop());
+        System.out.println(stack);
+
+        System.out.println(stack.empty());
+        System.out.println(stack);
+    }
+
+    void queue(){
+        Queue<Integer> queue = new ArrayDeque<>();
+        queue.add(10);
+        queue.add(20);
+        queue.add(30);
+        queue.add(40);
+//        System.out.println(queue);
+
+        queue.offer(50);
+        queue.offer(60);
+        queue.offer(70);
+        queue.offer(80);
+//        System.out.println(queue);
+//
+//        System.out.println(queue.poll());
+//        System.out.println(queue.peek());
+//        System.out.println(queue.element());
+
+        PriorityQueue<Integer> priorityq = new PriorityQueue<>();
+        priorityq.add(10);
+        priorityq.add(20);
+        priorityq.add(30);
+        System.out.println(priorityq);
+        System.out.println(priorityq.peek());
+        System.out.println(priorityq.poll());
+        System.out.println(priorityq);
+
+    }
+     void queue()
     {
-        int [][]intervals = {{1,3},{2,6},{7,8}};
-        mergeIntervals(intervals);
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(15);
+        q.offer(25);
+        q.offer(36);
+        System.out.println(q);
+
+        q.poll();
+        System.out.println(q);
+
+        System.out.println(q.peek());
+
+        System.out.println(q.element());//dangerous
+    }
+
+    void priorityQueue()
+    {
+        PriorityQueue<Integer> pqq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>
+                                    (Comparator.reverseOrder());
+        pq.offer(99);
+        pq.offer(45);
+        pq.offer(30);
+        System.out.println(pq);
+
+        pq.poll();
+        System.out.println(pq);
+
+        System.out.println( pq.peek());
+    }
+
+    void deque()
+    {
+        ArrayDeque<Integer> d = new ArrayDeque<>();
+        d.offer(14);
+        d.offer(45);
+        d.offer(24);
+        System.out.println(d);
+
+        d.offerFirst(12);
+        System.out.println(d);
+
+        d.offerLast(786);
+        System.out.println(d);
+
+        System.out.println(d.peek());
+        System.out.println(d.peekFirst());
+        System.out.println(d.peekLast());
+
+        System.out.println(d.pollLast());
+        System.out.println(d);
+    }
+
+    void set()
+    {
+        //order may be changed
+        Set<Integer> sss = new HashSet<>();//Tc : O(1);
+        Set<Integer> ss = new LinkedHashSet<>();// O(n)
+        Set<Integer> s = new TreeSet<>();//O(logn)sortedfromgiver
+        s.add(789);
+        s.add(45);
+        s.add(78);
+        s.add(98);
+        s.add(98);
+        System.out.println(s);
+
+        System.out.println(s.contains(98));
+        s.remove(98);
+        System.out.println(s);
+
+        System.out.println(s.contains(98));
+
+        System.out.println(s.isEmpty());
+        System.out.println(s.size());
+        s.clear();
+        System.out.println(s);
+    }
+
+    void map()
+    {
+//        Map<String, Integer> mp = new HashMap<>();
+        Map<String, Integer> mp = new TreeMap<>();//O(log n)
+              //key   value
+        mp.put("one",1);
+        mp.put("two",2);
+        mp.put("three",3);
+        mp.put("four",4);
+        mp.put("five",5);
+
+//        if(!mp.containsKey("five"))
+//        {
+//            mp.put("five",55);
+//        }
+//
+//        mp.putIfAbsent("five",15);
+        System.out.println(mp);
+
+        //iteration of a map
+        for(Map.Entry<String,Integer> e:mp.entrySet())
+        {
+//            System.out.println(e);
+//            System.out.println(e.getKey());
+//            System.out.println(e.getValue());
+        }
+
+        for(String key:mp.keySet())
+        {
+//            System.out.println(key);
+        }
     }
 }
 
+class ArraysClass
+{
+    //manipulating  array not arraylist
+    void manipulate()
+    {
+        int []a = {2,4,5,6,7,8,10,20,64,56};
+        int ind = Arrays.binarySearch(a,0);
+        System.out.println(ind);
+        Arrays.sort(a);
+    }
+}
+
+class collectionClass
+{
+    void collect()
+    {
+        List l = new ArrayList();
+        l.add(15);
+        l.add(25);
+        l.add(65);
+        l.add(98);
+
+        System.out.println(Collections.max(l));
+        System.out.println(Collections.min(l));
+
+        System.out.println(Collections.frequency(l,9));
+
+        Collections.sort(l);
+        System.out.println(l);
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+public class expert{
+    public static void main(String []args){
+//        System.out.println("Alvida Alvida Mahe Ramzan");
+        collection_frameWork frame = new collection_frameWork();
+//        frame.arrayList();
+//        frame.stack();
+        frame.queue();
+    }
+}*/
