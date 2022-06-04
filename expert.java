@@ -3562,38 +3562,174 @@ public class expert {
 //        brute_power(x,n);
         opti_power(x,n,1,0,negative);
     }
-}
-*/
+}*/
+/*
 package com.practiceCode;
-import java.util.ArrayList;
-import java.util.List;
-public class expert
-{
-    static void mergeIntervals(int [][]intervals)
-    {
-        List<int []>res = new ArrayList<>();
-        int []start = intervals[0];
-        int []end = intervals[1];
-        for(int i=0;i< intervals.length;i++)
-        {
-            start = intervals[i];
-            end = intervals[i];
-            for(int j=0;j<intervals[0].length;j++)
-            {
-//                System.out.print(start[j]+"  ");
-                System.out.print(end[j]+"  ");
-            }
-            System.out.println();
+import org.w3c.dom.Node;
+class linkedlist{
+    Node head;
+    static class Node{
+        int val;
+        Node next;
+        Node(int val){
+            this.val=val;
+            next=null;
         }
     }
-    public static void main(String[] args)
-    {
-        int [][]intervals = {{1,3},{2,6},{7,8}};
-        mergeIntervals(intervals);
+
+    void printLinked(){
+        Node temp  =head;
+        while(temp != null){
+            System.out.print(temp.val+"  ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    void insertAtFirst(int data){
+        Node temp = head;
+        Node newNode = new Node(data);
+        newNode.next = temp;
+        head = newNode;
+    }
+
+    void insertAtLast(int data){
+        Node newnode = new Node(data);
+        Node tmp = head;
+        while(tmp.next != null){
+            tmp=tmp.next;
+        }
+        newnode.next = null;
+        tmp.next = newnode;
+    }
+
+    void insertAtindex(int data,int pos){
+        Node newnode = new Node(data);
+        Node temp = head;
+        int count = 1;
+        while(count != pos-1){
+            temp = temp.next;
+            count++;
+        }
+        newnode.next = temp.next;
+        temp.next = newnode;
+    }
+
+    void deleteAtFirst(){
+        Node tmp = head;
+        head = tmp.next;
+    }
+    void deleteLast(){
+        Node tmp = head;
+        while(tmp.next.next != null){
+            tmp=tmp.next;
+        }
+        tmp.next = null;
+    }
+    void deleteAtindex(int pos){//3
+        Node tmp = head.next.next;
+        Node prev = head;
+        int count =1;
+        if(tmp == null){
+            return;
+        }
+        while(count != pos-1 && tmp.next != null){
+            tmp=tmp.next;
+            prev = prev.next;
+            count++;
+        }
+        prev.next = tmp;
     }
 }
+public class expert {
+    public static void main(String[] args) {
+        linkedlist lost = new linkedlist();
+        lost.head = new linkedlist.Node(10);
+        lost.printLinked();
+        lost.insertAtFirst(4);
+        lost.insertAtFirst(2);
+        lost.insertAtFirst(5);
+        lost.printLinked();
+        lost.insertAtLast(786);
+        lost.printLinked();
+        lost.insertAtindex(6,2);
+        lost.printLinked();
+        lost.deleteAtFirst();
+        lost.printLinked();
+        lost.deleteLast();
+        lost.printLinked();
+        lost.deleteAtindex(3);
+        lost.deleteAtindex(3);
+        lost.deleteAtindex(3);
+        lost.printLinked();
+    }
+}
+package com.practiceCode;
+import org.w3c.dom.Node;
+class linkedlist{
+    Node head;
+    static class Node{
+        int val;
+        Node next;
+        Node(int val){
+            this.val=val;
+            next=null;
+        }
+    }
 
+    Node printLinked(Node temp){
+//        Node temp  =head;
+        while(temp != null){
+            System.out.print(temp.val+"  ");
+            temp = temp.next;
+        }
+        System.out.println();
+        return temp;
+    }
 
+    Node reverseList(){
+        Node prev = null;
+        Node curr = head;
+        if(head==null){
+            System.out.println("Only one value");
+            return head;
+        }
+        if(curr.next.next==null){
+            System.out.println("Only two value");
+            Node nextnode = curr.next;
+            nextnode.next = curr;
+            curr.next = prev;
+            head = nextnode;
+            return curr;
+        }else{
+            System.out.println("More than two value");
+           while(curr != null){
+               Node nextnod = curr.next;
+               curr.next = prev;
+               prev = curr;
+               curr = nextnod;
+           }
+           printLinked(prev);
+           return prev;
+        }
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        linkedlist list = new linkedlist();
+        list.head = new linkedlist.Node(1);
+        linkedlist.Node s = new linkedlist.Node(2);
+        linkedlist.Node t = new linkedlist.Node(3);
+        linkedlist.Node q = new linkedlist.Node(6);
+        linkedlist.Node wt = new linkedlist.Node(7);
+        list.head.next = s;
+        s.next = t;
+        t.next = q;
+        q.next = wt;
+        list.printLinked(list.head);
+        list.reverseList();
+    }
+}*/
 
 
 
