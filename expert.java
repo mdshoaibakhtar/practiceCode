@@ -3562,8 +3562,7 @@ public class expert {
 //        brute_power(x,n);
         opti_power(x,n,1,0,negative);
     }
-}*/
-/*
+}
 package com.practiceCode;
 import org.w3c.dom.Node;
 class linkedlist{
@@ -3729,9 +3728,290 @@ public class expert {
         list.printLinked(list.head);
         list.reverseList();
     }
-}*/
+}
+package com.practiceCode;
+
+import java.util.Arrays;
+
+public class expert {
+    static void traversl(int []a){
+        for(int i:a){
+            System.out.print(i+"  ");
+        }
+        System.out.println();
+    }
+    static void  bruteForcemerge(int []a,int []b,int m,int n){
+        int i=m;int j=0;
+        while(i < m+n && j < n){
+            a[i++] = b[j++];
+        }
+        Arrays.sort(a);
+        traversl(a);
+    }
+    static void optimalMerge(int []a,int []b,int m,int n){
+         int i=m-1;int j=n-1;int k= m+n-1;
+        System.out.println("optimal");
+         while(i>=0 || j>=0){
+             if(i<0){
+                 a[k--]=b[j--];
+             }
+             else if(j<0){
+                 a[k--]=a[i--];
+             }
+             else if(a[i]>b[j]){
+                 a[k--] = a[i--];
+             }
+             else{
+                 a[k--] = b[j--];
+             }
+         }
+         traversl(a);
+    }
+    public static void main(String[] args) {
+        System.out.println("Welcome to the merging");
+        int []a = {1,2,3,0,0,0};
+        int []b = {2,3,4};
+        int m=3;int n=3;
+        traversl(a);
+        traversl(b);
+        optimalMerge(a,b,m,n);
+    }
+}
+package com.practiceCode;
+public class expert {
+    static int recursion(int n){
+        if(n == 0 || n==1){
+            return 1;
+        }else{
+            return n * recursion(n-1);
+        }
+    }
+    static void printArr(int []a,int i){
+        if(i < a.length){
+            System.out.print(a[i]+" ");
+            printArr(a,i+1);
+        }
+    }
+    static int sumOfarr(int []a,int i,int sum){
+        if(i< a.length){
+            sum =sum +  a[i];
+            return sumOfarr(a,i+1,sum);
+        }
+        return sum;
+    }
+    static int twoSum(int []a,int i,int target,int sum){
+        if(target==sum || i < a.length){
+            System.out.println("mission completed");
+            return 1;
+        }
+        else{
+            sum = sum + a[i];
+            return twoSum(a,i+1,target,sum);
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println(recursion(5));
+        int []a = {1,2,3,4,5,6};
+        printArr(a,0);
+        System.out.println();
+        System.out.println(sumOfarr(a,0,0));
+        System.out.println(twoSum(a,0,8,0));
+    }
+}
+package com.practiceCode;
+import org.w3c.dom.Node;
+class ListNode
+{
+    ListNode head;
+    ListNode next;
+    int val;
+    ListNode(){}
+    ListNode(int val)
+    {
+        this.val = val;
+        this.next = null;
+    }
+
+    void printlist(ListNode head)
+    {
+        ListNode tmp = head;
+        while(tmp != null)
+        {
+            System.out.print(tmp.val+" ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
+
+    void reverse(ListNode head)
+    {
+        ListNode tmp = head;
+        if(head.next==null)
+        {
+            System.out.println("Single Node");
+            System.out.println(head.val);
+        }
+        else if(tmp.next.next == null)
+        {
+            System.out.println("Two Node");
+            ListNode nextnode = tmp.next;
+            nextnode.next = tmp;
+            tmp.next = null;
+            head = nextnode;
+        }
+        else
+        {
+            System.out.println("More than two nodes");
+            ListNode prev = null;
+            ListNode curr =  head;
+            while(curr != null)
+            {
+                ListNode nexnode = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = nexnode;
+            }
+            printlist(prev);
+        }
+    }
+
+    //21. Merge Two Sorted Lists
+    void mergeSortedList(ListNode list1,ListNode list2)
+    {
+        ListNode curr1 = list1.head;
+        ListNode curr2  =list2.head;
 
 
+        ListNode dummy = new ListNode();
+        ListNode tail = dummy;
+
+
+        while(curr1 != null && curr2 != null)
+        {
+            if(curr1.val <= curr2.val){
+                tail.next = curr1;
+                curr1 = curr1.next;
+            }
+            else if(curr1.val > curr2.val)
+            {
+                tail.next = curr2;
+                curr2 = curr2.next;
+            }
+            tail = tail.next;
+        }
+        while(curr1 != null){
+            tail.next = curr1;
+            curr1 = curr1.next;
+            tail = tail.next;
+        }
+        while(curr2 != null){
+            tail.next = curr2;
+            curr2 = curr2.next;
+            tail = tail.next;
+        }
+        printlist(dummy.next);
+    }
+}
+
+public class expert
+{
+    public static void main(String[] args)
+    {
+        ListNode list = new ListNode();
+        ListNode list1 = new ListNode();
+        list1.head = new ListNode(5);
+        ListNode two = new ListNode(6);
+        ListNode three = new ListNode(9);
+        list1.head.next = two;
+        two.next = three;
+        list1.printlist(list1.head);
+
+        ListNode list2 = new ListNode();
+        list2.head = new ListNode(0);
+        ListNode two2 = new ListNode(2);
+        ListNode three3 = new ListNode(3);
+        list2.head.next = two2;
+        two2.next = three3;
+        list2.printlist(list2.head);
+
+        list.mergeSortedList(list1,list2);
+
+
+    }
+}
+package com.practiceCode;
+class ListNode
+{
+    ListNode head;
+    ListNode next;
+    int val;
+    ListNode(){}
+    ListNode(int val)
+    {
+        this.val = val;
+        this.next = null;
+    }
+
+    //method to print the linked list
+    void printlist(ListNode head){
+        ListNode tmp = head;
+        while(tmp != null){
+            System.out.print(tmp.val+" ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
+
+    void swapping(ListNode list,int k){
+        ListNode ptr = list;
+        int len = 0;
+        while(ptr != null){
+            ptr = ptr.next;
+            len++;
+        }
+//        System.out.println("Length of the linked list is "+len);
+
+        int p = len-k+1;int n=1;
+        ListNode start = list;
+        ListNode end = list;
+
+        while(n != k){
+            start = start.next;
+            n++;
+        }
+        n= 1;
+        while( n != p){
+            end = end.next;
+            n++;
+        }
+
+        int temp = start.val;;
+        start.val = end.val;
+        end.val = temp;
+
+        ptr = list;
+        printlist(ptr);
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        ListNode list = new ListNode();
+        list.head = new ListNode(5);
+        ListNode two = new ListNode(6);
+        ListNode three = new ListNode(9);
+        ListNode four = new ListNode(8);
+        ListNode five = new ListNode(8);
+        ListNode six = new ListNode(8);
+        list.head.next = two;
+        two.next = three;
+        three.next = four;
+        four.next = five;
+        five.next = six;
+        list.printlist(list.head);
+        list.swapping(list.head,2);
+    }
+}
+*/
 
 
 
