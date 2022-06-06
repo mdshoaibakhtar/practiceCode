@@ -4011,7 +4011,184 @@ public class expert {
         list.swapping(list.head,2);
     }
 }
+//two sum
+//Input: nums = [2,7,11,15], target = 9
+//        Output: [0,1]
+//        Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+
+
+//Buy and sell stock
+//Input: prices = [7,1,5,3,6,4]
+//        Output: 5
+//        Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+//        Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+
+package com.practiceCode;
+import java.util.ArrayList;
+class leetcode{
+    void brutesolution(int []nums,int target){
+        ArrayList ans = new ArrayList();
+        boolean flag = false;
+        for(int i=0;i< nums.length;i++){
+            for(int j=0;j< nums.length;j++){
+                if(nums[i]+nums[j]==target && !flag){
+                    ans.add(i);
+                    ans.add(j);
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        System.out.println(ans);
+    }
+
+    void recursiveWay(int []nums,int target,int ind,int sum,ArrayList ans){
+        if(ind >= nums.length || sum == target){
+            System.out.println("Mission completed...");
+            System.out.println(ans);
+            return;
+        }
+        sum =sum+ nums[ind];
+        ans.add(nums[ind]);
+        recursiveWay(nums, target, ind+1, sum,ans);
+        ans.remove(ans.size()-1);
+
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        //Two sum problem where we have to find the index whose element achieve the given target by adding the two element;
+        int []nums = {9,8,11,15};
+        int target = 19;
+        //instantiate the class object
+        leetcode leet = new leetcode();
+        //we have two to the solve the problem statemen
+        //1.Brute force which is basic and mandatory to know: we can solve the problem statement by using the two for loop whose time time complexity would be O(n^2), which is not optimal
+        leet.brutesolution(nums,target);
+        //2.Optimal which,interviewer want:To solve the problem statement optimally we can use recursion to optimized the time complexity
+        ArrayList n = new ArrayList();
+        leet.recursiveWay(nums,target,0,0,n);
+    }
+}
+//Intersection
+//     Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
+//        Output: [4,9]
+//        Explanation: [9,4] is also accepted.
+package com.practiceCode;
+import java.util.ArrayList;
+public class expert {
+    static void interSection(int []a,int []b){
+        ArrayList ans = new ArrayList();
+        boolean flag = false;
+        for(int i=0;i<a.length;i++){
+            flag = false;
+               for(int j=0;j<b.length;j++){
+                  if(!flag){
+                      if(a[i]==b[j]){
+                          ans.add(a[i]);flag=true;
+                      }
+                  }
+           }
+        }
+        System.out.println(ans);
+    }
+    public static void main(String[] args) {
+        int []a = {0};
+        int []b = {9,4,9,5,8,4};
+        interSection(a,b);
+    }
+}
+//Add two number
+//Input: l1 = [2,4,3], l2 = [5,6,4]
+//        Output: [7,0,8]
+//        Explanation: 342 + 465 = 807.
+package com.practiceCode;
+class ListNode
+{
+    ListNode head;
+    ListNode next;
+    int val;
+    ListNode(){}
+    ListNode(int val)
+    {
+        this.val = val;
+        this.next = null;
+    }
+
+    //method to print the linked list
+    void printlist(ListNode head){
+        ListNode tmp = head;
+        while(tmp != null){
+            System.out.print(tmp.val+" ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
+
+    void addingTwoNumber(ListNode list1,ListNode list2){
+        ListNode l1 = list1;
+        ListNode l2 = list2;
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        int sum =0;int carry=0;
+
+        while(l1 != null || l2 != null || carry==1){
+            sum = 0;
+            if(l1 != null){
+                sum = sum + l1.val;
+                l1= l1.next;
+            }
+            if(l2 != null){
+                sum = sum + l2.val;
+                l2= l2.next;
+            }
+            sum = sum + carry;
+            carry = sum / 10;
+            ListNode tmp = new ListNode(sum%10);
+            tail.next = tmp;
+            tail = tail.next;
+        }
+        System.out.println("Adding two Number");
+        printlist(dummy.next);
+
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        ListNode list = new ListNode();
+        ListNode list1 = new ListNode();
+        list1.head = new ListNode(2);
+        ListNode sec = new ListNode(4);
+        ListNode thir = new ListNode(3);
+        list1.head.next = sec;
+        sec.next = thir;
+
+        ListNode list2 = new ListNode();
+        list2.head = new ListNode(5);
+        ListNode fou = new ListNode(6);
+        ListNode fiv = new ListNode(7);
+        ListNode sex = new ListNode(9);
+        list2.head.next = fou;
+        fou.next = fiv;
+        fiv.next = sex;
+
+        list.printlist(list1.head);
+        list.printlist(list2.head);
+
+        list.addingTwoNumber(list1.head,list2.head);
+
+
+    }
+}
 */
+
+
+
+
+
+
+
+
 
 
 
