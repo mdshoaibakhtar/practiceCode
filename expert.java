@@ -4180,20 +4180,252 @@ public class expert {
 
     }
 }
+//print the subset of the array element
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+class subset{
+    //Brute force approach
+    void bruteForce(int []nums){
+        List<List<Integer>> ans = new ArrayList<>();
+        int sum=0;
+        for(int i=0;i<Math.pow(2,nums.length);i++){
+            int tmp = i;sum = 0;
+            List l = new ArrayList();
+            for(int j=nums.length-1;j>=0;j--){
+                int rem =  tmp % 2;
+                tmp = tmp / 2;
+                if(rem==1){
+                    sum += nums[j];
+                }
+            }
+            l.add(sum);
+            ans.add(l);
+        }
+        System.out.println(ans);
+    }
+
+    void optimalSol(int []nums,int ind,List<List<Integer>> ans,List tmp){
+        if(ind == nums.length){
+            System.out.println(tmp);
+            ans.add(tmp);
+            return;
+        }
+        tmp.add(nums[ind]);
+        optimalSol(nums,ind+1,ans,tmp);
+        tmp.remove(tmp.size()-1);
+        optimalSol(nums,ind+1,ans,tmp);
+    }
+
+    List<List<Integer>> optimalSolSum(int []nums,int ind,List<List<Integer>> ans,List tmp,int sum){
+        if(ind == nums.length){
+            tmp.add(sum);
+            ans.add(tmp);
+            System.out.print(tmp+" ");
+            return ans;
+        }
+        sum = sum + nums[ind];
+        optimalSolSum(nums,ind+1,ans,tmp,sum);
+        tmp.remove(tmp.size()-1);
+        sum = sum-nums[ind];
+        optimalSolSum(nums,ind+1,ans,tmp,sum);
+
+        return ans;
+    }
+
+}
+public class expert {
+    public static void main(String[] args) {
+        int []nums = {5,2,1};
+        subset set = new subset();
+//        set.bruteForce(nums);
+//        set.optimalSol(nums,0,new ArrayList<>(),new ArrayList());
+        set.optimalSolSum(nums,0,new ArrayList<>(),new ArrayList(),0);
+    }
+}
 */
+/*
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+public class expert {
+    static void twoSum(int []s, int i, int target, int sum, List ans){
+        if(i>=s.length){
+            if(target==sum){
+                System.out.println(ans+""+sum);
+            }
+            return;
+        }
+        sum = sum + s[i];
+        ans.add(i);
+        twoSum(s,i+1,target,sum,ans);
+        sum = sum - s[i];
+        ans.remove(ans.size()-1);
+        twoSum(s,i+1,target,sum,ans);
+    }
+    public static void main(String[] args) {
+        int []a = {-2,4,6,-1};
+        int target = 5;
+        twoSum(a,0,target,0,new ArrayList());
+    }
+}
+//Best time to buy and sell stock
+package com.practiceCode;
+public class expert {
+    public static void main(String[] args) {
+        int []prices = {7,1,5,3,6,4};
+        //output = 5 (6 - 1);
+        int profit=0;
+        for(int i=0;i<prices.length;i++){
+            for(int j=i+1;j<prices.length;j++){
+                if(prices[j]-prices[i]>profit){
+                   profit =  prices[j]-prices[i];
+                }
+            }
+        }
+        System.out.println(profit);
+        //optimal solution
+       int rofit = 0;
+        int minsofart=0;
+        int temp = 0;
+        for(int i=0;i<prices.length;i++){
+            temp=0;
+            minsofart = Math.min(minsofart,prices[i]);
+            temp = prices[i]-minsofart;
+            rofit = Math.max(rofit,temp);
+        }
+        System.out.println(profit);
+    }
+}
 
 
+//hackerank
+package com.practiceCode;
+public class expert {
+    public static void main(String[] args) {
+        int []arr = {1,-1,0,1,-1};
+        int pos=0;
+        int neg=0;
+        int zero=0;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]==0){
+             zero++;
+            }
+            else if(arr[i]>=1){
+                pos++;
+            }else {
+                neg++;
+            }
+        }
+        float n = arr.length;
+        float posratio =(pos/n);
+        float negRatio =(neg/n);
+        float zeroratio =(zero/n);
+        System.out.println(String.format("%.6f",posratio));
+        System.out.println(String.format("%.6f",negRatio));
+        System.out.println(String.format("%.6f",zeroratio));
+    }
+}
+
+//Hackerrank Time Conversion
+//07:05:45PM ==> 19:05:45
+//12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+//12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+package com.practiceCode;
+public class expert {
+    public static void main(String[] args) {
+        String time = "12:05:45AM";
+        String upDateTime="";
+        if(time.charAt(time.length()-2)=='P'){
+            if(time.substring(0, 2).equals("12")){
+                System.out.println(time);
+            }else{
+                String update = time.substring(0,2);
+                int upd = Integer.parseInt(update)+12;
+                update = Integer.toString(upd)+":" + time.substring(3,time.length());
+                System.out.println(update);
+            }
+        }else{
+            if(time.substring(0, 2).equals("12")){
+                upDateTime = "00:" + time.substring(3,time.length());
+                System.out.println(upDateTime);
+            }else{
+                System.out.println("Leave it");
+            }
+        }
+    }
+}*/
 
 
+//remove linkedlist element
+package com.practiceCode;
+class ListNode{
+    ListNode head;
+    ListNode next;
+    int val;
 
+    ListNode() {
+    }
 
+    ListNode(int val) {
+        this.val = val;
+        this.next = null;
+    }
 
+    //method to print the linked list
+    void printlist(ListNode head) {
+        ListNode tmp = head;
+        while (tmp != null) {
+            System.out.print(tmp.val + " ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
 
+    void removeNode(ListNode list, int val){
+        ListNode curr = list;
+        if (list == null) {
+            System.out.println("__");
+            return;
+        }
 
+        while(list.val==val){
+            list = list.next;
+            if(list==null){
+                return;
+            }
+        }
 
-
-
-
+        curr = list;
+        while (curr.next != null ) {
+            if (curr.next.val == val) {
+                curr.next = curr.next.next;
+            } else {
+                curr = curr.next;
+            }
+        }
+        printlist(list);
+    }
+}
+ public class expert {
+        public static void main(String[] args) {
+            ListNode list = new ListNode();
+            list.head = new ListNode(3);
+            ListNode two = new ListNode(6);
+            ListNode three = new ListNode(9);
+            ListNode four = new ListNode(6);
+            ListNode five = new ListNode(8);
+            ListNode six = new ListNode(3);
+            list.head.next = two;
+            two.next = three;
+            three.next = four;
+            four.next = five;
+            five.next = six;
+            list.printlist(list.head);
+            list.removeNode(list.head,3);
+        }
+}
+//reshape the matrix
 
 
 
