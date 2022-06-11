@@ -869,9 +869,8 @@ public class expert
         int n = 3;
         System.out.println(fibonacciSeries(n));
     }
-}*/
+}
 //Sorting
-/*
 1.Bubble Sort
 2.Selection Sort
 3.Insertion Sort
@@ -1148,7 +1147,7 @@ public class expert
     }
 }
 //merge Sort
-package code.solution;
+package com.practiceCode;
 public class expert
 {
     static void traversal(int []arr)
@@ -1159,49 +1158,12 @@ public class expert
         }
         System.out.println();
     }
-
-    static void mergee(int []arr,int low,int mid,int high)
+    static void merge(int []arr, int mid, int low, int high)
     {
-        int[] brr = new int[arr.length];
-        int i = low;
-        int j = mid+1;
-        int k = low;
-        while (i <= mid && j <= high)
-        {
-            if(arr[i]<arr[j])
-            {
-                brr[k] = arr[i];
-                i++;
-            }else {
-                brr[k] = arr[j];
-                j++;
-            }
-            k++;
-        }
-
-        if(i > mid)
-        {
-            while(j<=high)
-            {
-                brr[k] = arr[j];
-                j++;k++;
-            }
-        }else {
-            while(i<=mid)
-            {
-                brr[k] = arr[i];
-                i++;k++;
-            }
-        }
-    }
-
-    static void merge(int arr[], int mid, int low, int high)
-    {
-        int []B = new int[20];
-        int i, j, k;
+        int []B = new int[arr.length]; int k = low;
+        int i, j;
         i = low;
         j = mid + 1;
-        k = low;
 
         while (i <= mid && j <= high)
         {
@@ -1218,6 +1180,7 @@ public class expert
                 k++;
             }
         }
+
         while (i <= mid)
         {
             B[k] = arr[i];
@@ -4243,8 +4206,6 @@ public class expert {
         set.optimalSolSum(nums,0,new ArrayList<>(),new ArrayList(),0);
     }
 }
-*/
-/*
 package com.practiceCode;
 import java.util.ArrayList;
 import java.util.List;
@@ -4354,9 +4315,7 @@ public class expert {
             }
         }
     }
-}*/
-
-
+}
 //remove linkedlist element
 package com.practiceCode;
 class ListNode{
@@ -4425,7 +4384,386 @@ class ListNode{
             list.removeNode(list.head,3);
         }
 }
-//reshape the matrix
+//merge sort
+package com.practiceCode;
+class mergesort{
+    void traversal(int []a){
+        for(int i:a){
+            System.out.print(i+" ");
+        }
+        System.out.println();
+    }
+
+    int[] merge(int []n1,int []n2){
+        int m = n1.length;int n = n2.length;
+        int []marr = new int[m+n];
+        int i=0;int j=0;int k=0;
+
+        if(m==0 && n==0){
+            return marr;
+        }
+
+        while(i<m && j<n){
+            if(n1[i]<n2[j]){
+//                System.out.println("PPPP");
+                marr[k] = n1[i];
+                i++;
+            }else{
+                marr[k] = n2[j];
+                j++;
+            }
+            k++;
+        }
+        while(i<m){
+            marr[k] = n1[i];
+            k++;i++;
+        }
+        while(j<n){
+            marr[k] = n2[j];
+            k++;j++;
+        }
+        return marr;
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        mergesort m = new mergesort();
+        int []a  = {1,2,5,9};
+        int []aa = {0,3,4,6};
+        m.traversal(a);
+        m.traversal(aa);
+        m.merge(a,aa);
+        int []res = new int[a.length+aa.length];
+        res = m.merge(a,aa);
+        m.traversal(res);
+    }
+}
+//stack implementation
+package com.practiceCode;
+class stack{
+    int size;
+    int []arr = new int[size];
+    int top = -1;
+    stack(){}
+    stack(int size){
+        this.size = size;
+        arr = new int[size];
+    }
+
+    void push(int elem) {
+        if (size-1 == top) {
+            System.out.println("Stack is Full");
+            System.exit(1);
+        } else {
+            top++;
+            arr[top] = elem;
+        }
+    }
+
+    int pop(){
+        if(top==-1){
+            System.out.println("Stack is Empty");
+            System.exit(1);
+        }
+        int popElem = arr[top];
+        top--;
+        System.out.println(popElem+" is popped");
+        return popElem;
+    }
+
+    void stackElem(){
+        for(int i=top;i>=0;i--){
+            System.out.println(arr[i]);
+        }
+    }
+}
+class queue{
+    int size;
+    int []arr = new int[size];
+    int front = -1;int rear = -1;
+    int currSize= 0;
+
+    queue(){}
+    queue(int size){
+        this.size = size;
+        arr = new int[size];
+    }
+
+    void push(int Elem){
+        if(currSize == size-1){
+            System.out.println("Queue is Full !!");
+            System.exit(1);
+        }
+        else{
+            if(rear ==-1){
+                rear =0;front=0;
+            }
+            rear = (rear+1)%size;
+            arr[rear] = Elem;
+            System.out.println("The element pushed is " + Elem);
+            currSize++;
+        }
+    }
+
+    void pop(){
+        if (currSize == 0) {
+            System.out.println("Queue Empty\nExiting...");
+            System.exit(1);
+        }
+        int popped = arr[front];
+        if (currSize == 1) {
+            front = -1;
+            rear = -1;
+        }
+        front = (front + 1) % size;
+        System.out.println(popped+" is popped");
+        currSize--;
+    }
+
+    void printQueu(){
+        for(int i=front;i<=rear;i++){
+            System.out.print(arr[i%arr.length]+"  ");
+        }
+        System.out.println();
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+//     stack st = new stack(5);
+//     st.push(1);
+//     st.push(2);
+//     st.push(3);
+//     st.push(4);
+//     st.push(5);
+//     st.stackElem();
+//     st.pop();
+//     st.pop();
+//     st.stackElem();
+
+        queue q = new queue(5);
+        q.push(1);
+        q.push(2);
+        q.push(3);
+        q.push(4);
+        q.printQueu();
+        q.pop();
+        q.pop();
+        q.printQueu();
+        q.push(786);
+        q.push(786);
+        q.pop();
+        q.pop();
+        q.pop();
+        q.printQueu();
+        q.pop();
+        q.pop();
+
+    }
+}
+
+
+//valid parenthesis
+package com.practiceCode;
+import java.util.Stack;
+class stack{
+    int size;
+    char []arr = new char[size];
+    int top = -1;
+    stack(){}
+    stack(int size){
+        this.size = size;
+        arr = new char[size];
+    }
+
+    void push(char elem) {
+        if (size-1 == top) {
+            System.out.println("Stack is Full");
+            System.exit(1);
+        } else {
+            top++;
+            arr[top] = elem;
+            System.out.println(elem+" is push");
+        }
+    }
+
+    char pop(){
+        if(top==-1){
+            System.out.println("Stack is Empty");
+            System.exit(1);
+        }
+        char popElem = arr[top];
+        top--;
+        System.out.println(popElem+" is popped");
+        return popElem;
+    }
+
+    void stackElem(){
+        for(int i=top;i>=0;i--){
+            System.out.println(arr[i]);
+        }
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        String str = "([]){}";
+        int len = str.length();
+        stack s = new stack(len);
+
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)=='(' || str.charAt(i)=='[' || str.charAt(i)=='{'){
+                s.push(str.charAt(i));
+            }else{
+                char tmp = s.pop();
+            }
+        }
+    }
+}
+//merge sort by self
+package com.practiceCode;
+class mergesort{
+    void traversal(int []a){
+        for(int  i:a){
+            System.out.print(i+"  ");
+        }
+        System.out.println();
+    }
+    void merge(int []nums,int low,int mid,int high){
+        int []tmp = new int[nums.length];
+        int k=low;
+        int i=low;int j=mid+1;
+
+        while(i<=mid && j<=high){
+            if(nums[i]>nums[j]){
+                tmp[k++] = nums[j++];
+            }else{
+                tmp[k++]=nums[i++];
+            }
+        }
+
+        while(i<=mid){
+            tmp[k++] = nums[i++];
+        }
+        while(j<=high){
+            tmp[k++] = nums[j++];
+        }
+
+        for(int q=low;q<=high;q++){
+            nums[q] = tmp[q];
+        }
+
+    }
+    void sortmerge(int []nums,int low,int high){
+        if(low<high){
+            int mid = (low+high)/2;
+            sortmerge(nums,low,mid);
+            sortmerge(nums,mid+1,high);
+            merge(nums,low,mid,high);
+        }
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        int []nums = {5,2,1,0,9,0,-4,3,-4,1};
+        mergesort m = new mergesort();
+        System.out.println("Before Sorting");
+        m.traversal(nums);
+        m.sortmerge(nums,0,nums.length-1);
+        System.out.println("After Sorting");
+        m.traversal(nums);
+    }
+}
+package com.practiceCode;
+import java.util.HashSet;
+import java.util.LinkedList;
+
+public class expert {
+    public static void main(String[] args) {
+        HashSet<Integer> s = new HashSet<>();
+        int []m  = {1,2,2,3,3,4,5,1};
+        for(int i=0;i<m.length;i++){
+            if(!s.add(m[i])){
+                System.out.println(m[i]);
+            }
+        }
+    }
+}
+package com.practiceCode;
+import java.util.Scanner;
+public class expert {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int N = 0;
+        System.out.println("Enter N");
+        N = s.nextInt();
+
+        int[] data = new int[N];
+        for(int i=0; i<N; i++){
+            System.out.println("Enter data");//85 25 65 21 84
+            data[i] = s.nextInt();
+        }
+        int num = 0;int rm = 1;
+        for(int i=0;i<N;i++){
+            int p= (int)Math.pow(10,N);
+            int temp = data[i]%10;
+            if(p>0){
+                rm = p*temp;
+                p = p /  10;
+                num = num + rm;
+                System.out.println(num);
+            }
+        }
+
+        System.out.println("Ans");
+        System.out.println(num);
+    }
+}
+
+package com.practiceCode;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+class leetcode{
+    int[] twosum(int []a,int target){
+       Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        int []result = new int[2];
+        for(int i=0;i<a.length;i++){
+            if(map.containsKey(target-a[i])){
+                result[0]=map.get(target-a[i]);
+                result[1] = i;
+                return result;
+            }
+            map.put(a[i],i);
+        }
+        return result;
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        int []arr = {2,1,4,3,-6,4,1};
+        int target = 8;
+        leetcode l = new leetcode();
+        int []res = l.twosum(arr,target);
+//        res = l.twosum(arr,target);
+        for(int i=0;i<2;i++){
+            System.out.println(res[i]);
+        }
+    }
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
