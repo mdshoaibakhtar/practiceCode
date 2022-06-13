@@ -822,7 +822,7 @@ public class expert
       int []nums1 = {1,2,2,1,3,4};int []nums2 = {4,2,3,2};
         intersectionArr(nums1,nums2);
     }
-}
+}/*
 //268
 package code.solution;
 import java.util.Arrays;
@@ -4749,12 +4749,153 @@ public class expert {
             System.out.println(res[i]);
         }
     }
+}
+//Remove duplicate nodes from the linkedlist
+package com.practiceCode;
+class ListNode
+{
+    ListNode head;
+    ListNode next;
+    int val;
+    ListNode(){}
+    ListNode(int val)
+    {
+        this.val = val;
+        this.next = null;
+    }
+
+    void printlist(ListNode head)
+    {
+        ListNode tmp = head;
+        while(tmp != null)
+        {
+            System.out.print(tmp.val+" ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
+
+    void removeDuplicate(ListNode head){
+        ListNode curr = head;
+        if(head==null){
+            return;
+        }else if(head.next==null){
+            return;
+        }else if(head.next.next ==null){
+            if(head.val==head.next.val){
+                head.next = null;
+            }
+        }
+        else{
+            while(curr.next != null ){
+                if(curr.val == curr.next.val){
+                    curr.next = curr.next.next;
+                }else{
+                curr = curr.next;
+            }
+            }
+        }
+        System.out.println("After Reomving the Duplicate Node");
+        printlist(head);
+
+    }
+}
+
+public class expert{
+    public static void main(String[] args) {
+        ListNode list = new ListNode();
+        list.head = new ListNode(1);
+        ListNode two = new ListNode(11);
+        ListNode three = new ListNode(11);
+        ListNode four = new ListNode(11);
+        ListNode five = new ListNode(11);
+        list.head.next = two;
+        two.next = three;
+        three.next = four;
+        four.next = five;
+        list.printlist(list.head);
+        list.removeDuplicate(list.head);
+
+    }
+}
+package com.practiceCode;
+class leetcode{
+    void traversal(int [][]a){
+        for(int i=0;i<a.length;i++){
+            for(int j=0;j<a[0].length;j++){
+                System.out.print(a[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+    void reshapethematrix(int [][]mat,int r,int c){
+        if(mat.length==0){
+            return;
+        }
+        else if(mat.length==1 && mat[0].length==1){
+            return;
+        }else{
+            if(mat.length*mat[0].length!=r * c || (mat.length==r && mat[0].length==c)){
+                System.out.println("Illegal weapon");
+                System.exit(1);
+            }else {
+
+                int p=0;int k=0;
+                int [][]arr = new int[r][c];
+                for(int i=0;i<mat.length;i++){
+                  for(int j=0;j<mat[0].length;j++){
+                     if(k<c){
+                         arr[p][k] = mat[i][j];k++;
+                     }else{
+                         k=0;p++;arr[p][k] = mat[i][j];k++;
+                     }
+                  }
+              }
+                traversal(arr);
+            }
+
+
+        }
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        int [][]arr = {{1,2},{3,4},{8,5},{6,9}};
+        leetcode l = new leetcode();
+        l.traversal(arr);
+        l.reshapethematrix(arr, 2,4);
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+public class expert {
+    static void intersection(int []a,int []b){
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i:a){
+            if(map.containsKey(i)){
+                map.put(i,map.get(i)+1);
+            }else{
+                map.put(i,1);
+            }
+        }
+        List list = new ArrayList<>();
+        for(int i:b){
+          if(map.get(i) != null && map.get(i)>=1){
+            list.add(i);
+            map.put(i,map.get(i)-1);
+          }
+        }
+        System.out.println(list);
+    }
+    public static void main(String[] args) {
+        int []a = {1,2,2,1,3,3};
+        int []b = {1,2,2};
+        intersection(a,b);
+    }
 }*/
-
-
-
-
-
 
 
 
