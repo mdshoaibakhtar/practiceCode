@@ -4895,12 +4895,224 @@ public class expert {
         int []b = {1,2,2};
         intersection(a,b);
     }
+}
+//Valid parenthesis
+package com.practiceCode;
+import java.util.Stack;
+public class expert {
+    static boolean isValidParenthesis(String str){
+        Stack<Character> stack = new Stack<>();
+        char []c = str.toCharArray();
+        for(int i=0;i<str.length();i++)
+        {
+            if(c[i]=='(' || c[i]=='[' || c[i]=='{'){
+                stack.push(c[i]);
+            }else {
+                if(stack.isEmpty()) return false;
+                else{
+                    char popitem = stack.pop();
+                    if(c[i] == ')' && popitem !='('){
+                        return false;
+                    }
+                    else if(c[i] ==']' && popitem != '['){
+                        return false;
+                    }else if(c[i]=='}' && popitem != '{'){
+                        return false;
+                    }
+                }
+            }
+        }
+        if(stack.isEmpty()) return true;
+        return false;
+    }
+    public static void main(String[] args) {
+        String str ="({{}}[])";
+        System.out.println(isValidParenthesis(str));
+
+    }
+}
+//first unioque string
+package com.practiceCode;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class expert {
+    //Gives Tle
+    static int firstUnique(String str){
+        int count = -1;
+        for(int i=0;i<str.length();i++){
+            count= -1;
+            for(int j=0;j<str.length();j++){
+                if(str.charAt(i) == str.charAt(j) && i != j){
+                    count++;
+                }
+            }
+            if(count == -1){
+                System.out.println(str.charAt(i)+" "+i);
+                count = i;return i;
+            }
+        }
+        return -1;
+    }
+
+    static void uniqueLetter(String str){
+        HashMap<Character,Integer> map = new HashMap<>();
+        for(char a:str.toCharArray()){
+            if(map.containsKey(a)){
+                map.put(a,map.get(a)+1);
+            }else{
+                map.put(a,1);
+            }
+        }
+
+        for(int i=0;i<str.length();i++){
+            if(map.get(str.charAt(i))==1){
+                System.out.println(str.charAt(i));
+            }
+        }
+    }
+    public static void main(String[] args) {
+        String str ="kk";
+       int n =  firstUnique(str);
+        System.out.println(n);
+    }
+}
+
+//Three sum: Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+//Notice that the solution set must not contain duplicate triplets.
+//Input: nums = [-1,0,1,2,-1,-4]
+//      Output: [[-1,-1,2],[-1,0,1]]
+
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+class leetcode{
+    void threeSum(int []nums, int ind, List ds,List ans,int sum){
+        if(ind >= nums.length){
+            if(ds.size() == 3 && sum == 0){
+//                System.out.println(ds);
+                ans.add(ds);
+                System.out.println(ans);
+                return;
+            }
+            return;
+        }
+        ds.add(nums[ind]);
+        sum = sum  + nums[ind];
+        threeSum(nums,ind+1,ds,ans,sum);
+        ds.remove(ds.size()-1);
+        sum = sum - nums[ind];
+        threeSum(nums,ind+1,ds,ans,sum);
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        int []nums = {-1,0,1,2,-1,-4};
+        leetcode leet = new leetcode();
+        leet.threeSum(nums,0,new ArrayList(),new ArrayList(),0);
+    }
+}
+package com.practiceCode;
+import org.w3c.dom.Node;
+class ListNode
+{
+    ListNode head;
+    ListNode next;
+    int val;
+    ListNode(){}
+    ListNode(int val)
+    {
+        this.val = val;
+        this.next = null;
+    }
+
+    void printlist(ListNode head)
+    {
+        ListNode tmp = head;
+        while(tmp != null)
+        {
+            System.out.print(tmp.val+" ");
+            tmp = tmp.next;
+        }
+        System.out.println();
+    }
+
+    void rotateList(ListNode head,int k){
+        System.out.println("Rotate");
+        if(head == null || head.next == null || k==0)  return;
+
+        int n= 0;
+
+        ListNode cur = head;
+        while(cur !=  null)  n++;cur = cur.next;
+
+        if(k % n == 0)  return;
+
+           while(k > 0){
+               ListNode curr = head;
+               while(curr.next.next != null){
+                   curr = curr.next;
+               }
+               ListNode s = head;
+               head = curr.next;
+               head.next = s;
+               curr.next = null;
+               printlist(head);
+               k--;
+           }
+    }
+}
+
+public class expert
+{
+    public static void main(String[] args)
+    {
+        ListNode list = new ListNode();
+        list.head = new ListNode(5);
+        ListNode two = new ListNode(6);
+        ListNode three = new ListNode(9);
+        list.head.next = two;
+        two.next = three;
+        list.printlist(list.head);
+        list.rotateList(list.head,2);
+    }
 }*/
+//Longest Substring without repeating character
+package com.practiceCode;
+import java.util.HashMap;
+import java.util.Map;
+public class expert {
+    public static void main(String[] args) {
+//        Input: s = "pwwkew"
+//        Output: 3
+//        Explanation: The answer is "wke", with the length of 3.
+//        Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
-
-
-
-
+        String s = "aabbvcbbbaaa";
+        int temp = 0;int max = 0;
+        Map<Character,Integer> map = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            if(!map.containsKey(s.charAt(i))){
+                map.put(s.charAt(i),i);
+                System.out.println(s.charAt(i));
+                temp = map.size();
+                if(max <= temp){
+                    max = temp;
+                }
+            }else{
+//               System.out.println(map.size());
+                temp = map.size();
+                if(max <= temp){
+                    max = temp;
+                }
+                map.clear();i = i-1;
+                System.out.println("After");
+            }
+        }
+        System.out.println(max);
+    }
+}
 
 
 
