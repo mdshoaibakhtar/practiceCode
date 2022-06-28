@@ -5077,7 +5077,7 @@ public class expert
         list.printlist(list.head);
         list.rotateList(list.head,2);
     }
-}*/
+}
 //Longest Substring without repeating character
 package com.practiceCode;
 import java.util.HashMap;
@@ -5113,11 +5113,124 @@ public class expert {
         System.out.println(max);
     }
 }
+package com.practiceCode;
+public class expert{
+    static String spaceremover(String str){
+        str  = str.trim();
+        String update = "";
+        for(int i=0;i<str.length();i++){
+            if(str.charAt(i)== ' ' && str.charAt(i+1) != ' '){
+            update = update + ' ';
+          }
+            else if(str.charAt(i)!=' '){
+                update = update + str.charAt(i);
+            }
+        }
+//        System.out.println(update.length());
+//        System.out.println(update);
+        return update;
+    }
+
+    static void reverseString(String str){
+        String []arr = spaceremover(str).split(" ");
+        String rev = "";
+        for(int i=arr.length-1;i>=0;i--){
+            if(i == arr.length-1){
+                rev =arr[i];
+            }else{
+                rev = rev+" "+arr[i];
+            }
+        }
+        System.out.println(rev);
+    }
+    public static void main(String []args){
+        String str = "the sky is                                               blue                   ";
+      reverseString(str);
+    }
+}
+
+//Longest palindromic Substring
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+public class expert {
+    static boolean isPlaindrome(String str,int i,int j){
+        if(i >= j){
+            return true;
+        }
+        while (str.charAt(i) != str.charAt(j)){
+            return false;
+        }
+        return isPlaindrome(str,i+1,j-1);
+    }
+
+    static String substringSubset(String s, int i,int j){
+        if(s.length()==1) return s;
+        if(i >= s.length()){
+            return "";
+        }
+        if(isPlaindrome(s,i,j)){
+            String pal = "";
+            for(int p=i;p<=j;p++){
+                pal += s.charAt(p);
+            }
+//            System.out.println(pal);
+            return pal;
+        }else{
+            return substringSubset(s,i,j-1);
+        }
+    }
 
 
+    public static void main(String[] args) {
+    String str = "aacabdkacaa";
+    List<String> lia = new ArrayList<>();
+        for(int i=0;i<str.length();i++){
+            String ans  = "";
+                ans =  substringSubset(str,i,str.length()-1);
+                   lia.add(ans);
+        }
+        int max = 0;
+        String an = "";
+        for(int i=0;i<lia.size();i++){
+            if(lia.get(i).length() >  max){
+                max = lia.get(i).length();
+                an = lia.get(i);
+            }
+        }
+        System.out.println(lia);
+        System.out.println(an);
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-
-
+public class expert {
+    public static void main(String[] args) {
+       int []arr = {1,1,1,1,2,2,2,3,3,3};
+       int k = 3;
+       Map<Integer,Integer> map  = new HashMap<Integer,Integer>();
+       for(int a:arr){
+           if(map.containsKey(a)){
+               map.put(a,map.get(a)+1);
+           }else{
+               map.put(a,1);
+           }
+       }
+        List ans = new ArrayList();
+       for(Map.Entry<Integer,Integer> iterator:map.entrySet()){
+           System.out.println(iterator.getKey()+"=>"+iterator.getValue());
+           if(iterator.getValue()>=k){
+               ans.add(iterator.getKey());
+           }
+       }
+        System.out.println(ans);
+    }
+}
+*/
 
 
 
