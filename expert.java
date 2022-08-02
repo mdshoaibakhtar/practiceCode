@@ -4478,10 +4478,59 @@ class stack{
     }
 }
 class queue{
+//    int size;
+//    int []arr = new int[size];
+//    int front = -1;int rear = -1;
+//    int currSize= 0;
+//
+//    queue(){}
+//    queue(int size){
+//        this.size = size;
+//        arr = new int[size];
+//    }
+//
+//    void push(int Elem){
+//        if(currSize == size-1){
+//            System.out.println("Queue is Full !!");
+//            System.exit(1);
+//        }
+//        else{
+//            if(rear ==-1){
+//                rear =0;front=0;
+//            }
+//            rear = (rear+1)%size;
+//            arr[rear] = Elem;
+////            System.out.println("The element pushed is " + Elem);
+//            currSize++;
+//        }
+//    }
+//
+//    void pop(){
+//        if (currSize == 0) {
+//            System.out.println("Queue Empty\nExiting...");
+//            System.exit(1);
+//        }
+//        int popped = arr[front];
+//        if (currSize == 1) {
+//            front = -1;
+//            rear = -1;
+//        }
+//        front = (front + 1) % size;
+//        System.out.println(popped+" is popped");
+//        currSize--;
+//    }
+//
+//    void printQueu(){
+//        for(int i=front+1;i<=rear;i++){
+//            System.out.print(arr[i%arr.length]+"  ");
+//        }
+//        System.out.println();
+//    }
     int size;
     int []arr = new int[size];
-    int front = -1;int rear = -1;
-    int currSize= 0;
+    int curr = 0;
+    int front =-1;
+    int rear = -1;
 
     queue(){}
     queue(int size){
@@ -4489,44 +4538,40 @@ class queue{
         arr = new int[size];
     }
 
-    void push(int Elem){
-        if(currSize == size-1){
-            System.out.println("Queue is Full !!");
-            System.exit(1);
-        }
-        else{
-            if(rear ==-1){
-                rear =0;front=0;
+    void push(int elem){
+        if(curr == arr.length-1){
+            System.out.println("Queueu is full");
+        }else{
+            if(rear == -1){
+                rear = 0;front = 0;
             }
             rear = (rear+1)%size;
-            arr[rear] = Elem;
-            System.out.println("The element pushed is " + Elem);
-            currSize++;
+            arr[rear] = elem;
+            curr++;
         }
     }
 
     void pop(){
-        if (currSize == 0) {
-            System.out.println("Queue Empty\nExiting...");
-            System.exit(1);
+        if(curr == 0){
+            System.out.println("queue khaali hai");
+        }else{
+            int poped = arr[front];
+            front = (front+1)%size;
+            if(curr == 1){
+                front = -1;rear = -1;
+            }
+            System.out.println(poped+" is poped");
+            curr--;
         }
-        int popped = arr[front];
-        if (currSize == 1) {
-            front = -1;
-            rear = -1;
-        }
-        front = (front + 1) % size;
-        System.out.println(popped+" is popped");
-        currSize--;
+
     }
 
-    void printQueu(){
-        for(int i=front;i<=rear;i++){
-            System.out.print(arr[i%arr.length]+"  ");
-        }
-        System.out.println();
+    void print(){
+        for(int i=front;i<=rear;i++)
+            System.out.println(arr[i%arr.length]);
     }
 }
+
 public class expert {
     public static void main(String[] args) {
 //     stack st = new stack(5);
@@ -4545,23 +4590,12 @@ public class expert {
         q.push(2);
         q.push(3);
         q.push(4);
-        q.printQueu();
+        q.print();
         q.pop();
         q.pop();
-        q.printQueu();
-        q.push(786);
-        q.push(786);
-        q.pop();
-        q.pop();
-        q.pop();
-        q.printQueu();
-        q.pop();
-        q.pop();
-
+        q.print();
     }
 }
-
-
 //valid parenthesis
 package com.practiceCode;
 import java.util.Stack;
@@ -5230,7 +5264,377 @@ public class expert {
         System.out.println(ans);
     }
 }
-*/
+package com.practiceCode;
+class ListNode{
+    ListNode head;
+    ListNode next;
+    int val;
+    ListNode(){}
+    ListNode(int val){
+        this.val = val;
+        this.next = null;
+    }
+
+    void print(){
+        while (head != null){
+            System.out.println(head.val);
+            head = head.next;
+        }
+    }
+}
+public class expert {
+    public static void main(String []args){
+        System.out.println("Hello World");
+        ListNode list = new ListNode();
+        list.head = new ListNode(10);
+        ListNode two = new ListNode(20);
+        ListNode three = new ListNode(30);
+        list.head.next = two;
+        two.next = three;
+        list.print();
+    }
+}
+package com.practiceCode;
+class sort{
+    void traversal(int  []arr){
+        for (int j : arr) System.out.print(j + " ");
+        System.out.println();
+    }
+    void bubblesort(int []arr){
+        for(int i=0;i<arr.length;i++){
+            for(int  j=0;j<arr.length-i;j++){
+                if(arr[i]<arr[j]){
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+    }
+}
+public class expert{
+    public static void main(String []args){
+        int []arr = {2,5,7,-7,0,1};
+        sort sort = new sort();
+        System.out.println("Unsorted Array");
+        sort.traversal(arr);
+        sort.bubblesort(arr);
+        System.out.println("sorted Array");
+        sort.traversal(arr);
+
+    }
+}
+//Tree Data Structure using Java
+package com.practiceCode;
+import java.util.Scanner;
+import java.util.TreeSet;
+class TreeNode{
+    TreeNode left;
+    TreeNode right;
+    int val;
+    TreeNode(int val){
+        this.val = val;
+    }
+}
+class BinaryTree{
+    //no need to do this way bcz it is hectic to take the input always from the user side
+    //Using the below method we takes val of the nodes from the user...
+    public TreeNode createTree(){
+        Scanner sc = new Scanner(System.in);
+        TreeNode root = null;
+        System.out.println("Enter data: ");
+        int val = sc.nextInt();
+
+        if(val == -1) return  null;
+
+        root = new TreeNode(val);
+
+        System.out.println("Enter Left For: "+val);
+        root.left = createTree();
+
+        System.out.println("Enter Right For: "+val);
+        root.right = createTree();
+
+        return root;
+    }
+
+    //method to print value
+    public void inorderTraversal(TreeNode root){
+        if(root == null) return;
+        inorderTraversal(root.left);
+        System.out.print(root.val+" ");
+        inorderTraversal(root.right);
+    }
+}
+class Tree{
+    TreeNode root;
+    //method for traversing the tree
+    public void traverse(TreeNode root){
+        if(root == null) return;
+        if (root != null){
+            traverse(root.left);
+            System.out.print(root.val+" ");
+            traverse(root.right);
+        }
+    }
+
+    public int summation(TreeNode root,int sum){
+        if(root == null) return sum;
+        sum = summation(root.left,sum);
+        if(root.val>= 2 && root.val <=8){
+            sum = sum + root.val;
+        }
+        sum = summation(root.right,sum);
+        return sum;
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        Tree tree = new Tree();
+        tree.root = new TreeNode(2);
+        tree.root.left = new TreeNode(3);
+        tree.root.right = new TreeNode(4);
+        tree.root.left.left = new TreeNode(6);
+        tree.root.left.right = new TreeNode(4);
+        tree.root.right.left = new TreeNode(7);
+        tree.root.right.right = new TreeNode(7);
+        tree.traverse(tree.root);
+        System.out.println();
+        System.out.println(tree.summation(tree.root,0));
+
+
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+import java.util.List;
+
+class TreeNode{
+    TreeNode left;
+    TreeNode right;
+    int val;
+
+    TreeNode(int val){
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+class tree{
+    TreeNode root;
+    public void inorder(TreeNode root){
+        if (root == null) return;
+        inorder(root.left);
+        System.out.print(root.val+"  ");
+        inorder(root.right);
+    }
+
+    public List<Integer> Inorder(TreeNode root,List<Integer> ans){
+        if (root == null) return ans;
+        Inorder(root.left,ans);
+        ans.add(root.val);
+        Inorder(root.right,ans);
+        return ans;
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        tree tre = new tree();
+        tre.root = new TreeNode(10);
+        tre.root.left = new TreeNode(20);
+        tre.root.right = new TreeNode(30);
+        tre.root.left.left = new TreeNode(40);
+        tre.root.left.right = new TreeNode(50);
+        tre.root.right.left = new TreeNode(60);
+        tre.root.right.right = new TreeNode(70);
+//        tre.inorder(tre.root);
+        List<Integer> ans =new ArrayList<>();
+        ans = tre.Inorder(tre.root,new ArrayList<>());
+        System.out.println(ans);
+
+    }
+}
+package com.practiceCode;
+class TreeNode{
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(){}
+    TreeNode(int val){
+        this.val = val;
+        this.left = null;
+        this.right = null;
+    }
+}
+class tree{
+    TreeNode root;
+    int heightOfthetree(TreeNode root){
+        if(root == null)  return 0;
+        return Math.max(heightOfthetree(root.left),heightOfthetree(root.right))+1;
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        tree tre = new tree();
+        tre.root = new TreeNode(10);
+        tre.root.left = new TreeNode(20);
+        tre.root.right = new TreeNode(30);
+        tre.root.left.right = new TreeNode(50);
+        tre.root.right.left = new TreeNode(60);
+        tre.root.right.right = new TreeNode(70);
+        tre.root.left.left = new TreeNode(40);
+        tre.root.left.left.left = new TreeNode(80);
+        int ht  = tre.heightOfthetree(tre.root);
+        System.out.println("Height of the tree is : "+ht);
+    }
+}*/
+/*
+package com.practiceCode;
+import javax.swing.tree.TreeNode;
+class Node{
+    int val;
+    Node left;
+    Node right;
+    Node(){}
+    Node(int val){
+        this.val = val;
+        left = null;
+        right = null;
+    }
+}
+class Binarytree{
+    Node root;
+    void preOrder(Node root){
+        if(root == null) return;
+        System.out.print(root.val+" ");
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+
+    int evaluateTree(Node root){
+        if(root == null)  return 0;
+
+        if(root.val == 3){
+            if(evaluateTree(root.left) == 1 && evaluateTree(root.left) == 1){
+                return 1;
+            }else{
+                return 0;
+            }
+        }else{
+            if(evaluateTree(root.left) == 0 && evaluateTree(root.right) == 0){
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+    }
+}
+
+public class expert {
+    public static void main(String[] args) {
+        Binarytree bt = new Binarytree();
+        bt.root = new Node(2);
+        bt.root.left = new Node(1);
+        bt.root.right = new Node(3);
+        bt.root.right.left = new Node(0);
+        bt.root.right.right = new Node(1);
+        bt.preOrder(bt.root);
+        System.out.println();
+        System.out.println(bt.evaluateTree(bt.root));
+    }
+}
+package com.practiceCode;
+import java.util.ArrayList;
+public class expert {
+    public static void main(String[] args) {
+        int num  = 25143;
+        ArrayList<Integer> list = new ArrayList();
+        while(num > 0){
+            int rem = num % 10;
+            list.add(rem);
+            num = num / 10;
+        }
+//        System.out.println(list);
+
+        ArrayList<Integer> lis2 = new ArrayList<>();
+        for(int i =list.size()-1;i>=0;i--){
+            lis2.add(list.get(i));
+        }
+
+//        System.out.println(lis2);
+        ArrayList<Integer> newarr = new ArrayList<>();
+        for(int i=0;i<lis2.size();i++){
+            int tmp = ((i+3) % lis2.size());
+            newarr.add(lis2.get(tmp));
+        }
+//        System.out.println(newarr);
+
+
+        int ans = 1;
+        int tn = 1;
+        for(int i=0;i<list.size();i++){
+            ans = ans*tn + newarr.get(i);
+            tn = tn * 10;
+        }
+        System.out.println(ans);
+    }
+}
+package com.practiceCode;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class expert {
+    public static void main(String[] args) {
+        String str = "abcdef";
+        String str1 = "abcde";
+        Map<Character,Integer> map = new HashMap<>();
+        for(int i= 0;i<str1.length();i++){
+            map.put(str1.charAt(i),1);
+        }
+
+        for(int i=0;i<str.length();i++){
+            if(map.containsKey(str.charAt(i))){
+                continue;
+            }else{
+                System.out.println(str.charAt(i));
+            }
+        }
+    }
+}*/
+package com.practiceCode;
+public class expert {
+    public static void main(String[] args) {
+        int num  = 124578;
+
+        int ans = 0;
+        while(num > 0){
+            int rem = num % 10;
+            if(rem % 2 == 1){
+                ans += rem;
+            }
+            num /= 10;
+        }
+        System.out.println(ans);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
