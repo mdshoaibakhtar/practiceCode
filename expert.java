@@ -5488,8 +5488,7 @@ public class expert {
         int ht  = tre.heightOfthetree(tre.root);
         System.out.println("Height of the tree is : "+ht);
     }
-}*/
-/*
+}
 package com.practiceCode;
 import javax.swing.tree.TreeNode;
 class Node{
@@ -5603,9 +5602,9 @@ public class expert {
             }
         }
     }
-}*/
+}
 package com.practiceCode;
-public class expert {
+public class expert{
     public static void main(String[] args) {
         int num  = 124578;
 
@@ -5622,8 +5621,392 @@ public class expert {
 }
 
 
+package com.practiceCode;
+class pattern{
+    void square(){
+        //* * * * * *
+        //*         *
+        //*         *
+        //*         *
+        //*         *
+        //* * * * * *
+        for(int i=0;i<6;i++){
+            for(int  j=0;j<6;j++){
+                if(i==0 || i==5){
+                    System.out.print("* ");
+                }
+                else if(j==0 ||j==5){
+                    System.out.print("* ");
+                }else{
+                    System.out.print("  ");
+                }
+            }
+            System.out.println();
+        }
+    }
+//                 1
+//                 *
+//                * *
+//               * * *
+//              * * * *
+//             * * * * *
 
 
+    void triangle1(){
+        for(int i = 0;i<5;i++){
+            for(int j = 0;j<i+1;j++){
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+
+    void triangle2(){
+        for(int i = 0;i<5;i++){
+            for(int j = 0;j<i+1;j++){
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+    void triangle3(){
+        for(int i=5;i>=0;i--){
+            for(int j=i;j>=0;j--){
+                System.out.print("* ");
+            }
+            System.out.println();
+        }
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+      pattern pattern = new pattern();
+//      pattern.square();
+//      pattern.triangle1();
+//      pattern.triangle2();
+//      pattern.triangle3();
+    }
+}
+
+package com.practiceCode;
+class basic{
+   void oddEven(int n){
+       if(n % 2 == 0){
+           System.out.println(n +" Is Even No.");
+       }else{
+           System.out.println(n+" Is Odd No.");
+       }
+   }
+
+   void Isprime(int n){
+       if(n == 0 || n == 1){
+           System.out.println("Prefer Not To Stay");
+           System.exit(1);
+       }else if(n == 2){
+           System.out.println("Prime Number");
+           return;
+       }else{
+           int count = 2;
+           for(int i = 2;i<n/2;i++){
+               if(n % i == 0){
+                   count++;
+               }else if(count > 2){
+                   System.out.println("Not a prime Number");
+                   return;
+               }
+           }
+           System.out.println("Prime Number");
+       }
+   }
+
+   int factorial(int n){
+       if(n==0 || n == 1){
+           return 1;
+       }
+       return factorial(n-1)*n;
+   }
+
+}
+class sort{
+    void traversal(int []nums){
+        for(int a:nums){
+            System.out.print(a+" ");
+        }
+        System.out.println();
+    }
+    void bubbleSort(int []nums){
+        for(int i=0;i< nums.length;i++){
+            for(int j=1;j<nums.length-i;j++){
+                if(nums[j-1] > nums[j]){
+                    int temp = nums[j-1];
+                    nums[j-1] = nums[j];
+                    nums[j] = temp;
+                }
+            }
+        }
+    }
+    void insertionSort(int []nums){
+        System.out.println("Insertion Sort");
+    }
+    void Selection(int []nums){
+        System.out.println("Selection Sort");
+    }
+    void mergeSort(int []nums){
+        System.out.println("merge Sort");
+    }
+    void quickSort(int []nums){
+        System.out.println("quick Sort");
+    }
+    void heapSort(int []nums){
+        System.out.println("heap Sort");
+    }
+}
+class string{}
+class array{}
+public class expert {
+    public static void main(String[] args) {
+        basic practice = new basic();
+        practice.oddEven(10);
+        practice.Isprime(9973);
+        System.out.println(practice.factorial(5));
+
+        int []a = {1,-2,3,9,-7,15,0,-2};
+        sort sort = new sort();
+        System.out.println("Unsorted Array");
+        sort.traversal(a);
+        sort.bubbleSort(a);
+        System.out.println("Sorted Array");
+        sort.traversal(a);
+
+    }
+}
+package com.practiceCode;
+import java.util.HashMap;
+import java.util.Map;
+public class expert {
+    static void isIsomorphic(String s,String t){
+        if(s.length() != t.length())  return ;
+        if(s.length() == 0 && t.length() == 0) return ;
+        if(s.length() == 1 && (s.charAt(0) == t.charAt(0))) return ;
+        Map<Character,Character> map = new HashMap<Character,Character>();
+
+        for(int i=0;i<s.length();i++){
+            if(map.containsKey(s.charAt(i)) || map.containsValue(t.charAt(i))){
+                if( t.charAt(i) != map.get(s.charAt(i))){
+                    System.out.println(t.charAt(i) +" is not same as "+map.get(s.charAt(i)));
+                }
+            }else{
+                if(map.containsValue(t.charAt(i))) {
+                    map.put(s.charAt(i), t.charAt(i));
+                }else
+                {
+                    return;
+                }
+            }
+        }
+        for(Map.Entry<Character,Character> iter : map.entrySet()){
+            System.out.println(iter.getKey()+" = = = > "+iter.getValue());
+        }
+
+      return ;
+    }
+    public static void main(String[] args) {
+        String s = "baba";
+        String t = "badc";
+        isIsomorphic(s,t);
+
+    }
+}
+package com.practiceCode;
+class ListNode{
+    int val;
+    ListNode next;
+    ListNode head;
+    ListNode(){}
+    ListNode(int val){
+        this.val = val;
+        this.next = null;
+    }
+
+    void printNode(ListNode head){
+        while(head != null){
+            System.out.print(head.val+" ");
+            head = head.next;
+        }
+    }
+
+    void reverseList(ListNode head){
+        if(head == null || head.next == null){
+            printNode(head);
+            return;
+        }
+
+        ListNode prev = null;
+        ListNode curr = head;
+
+        while (curr != null){
+            ListNode nextnode = curr.next;
+            curr.next = prev;
+
+            //update all the nodes
+            prev = curr;
+            curr = nextnode;
+        }
+        printNode(prev);
+    }
+
+    void mergeLinkedList(ListNode list1,ListNode list2){
+//        printNode(list1.head);
+        ListNode curr1 = list1.head;
+        ListNode curr2 = list2.head;
+        ListNode dummy = new ListNode();
+        ListNode tail = dummy;
+        while(curr1 !=  null && curr2 != null){
+            if(curr1.val <= list2.val){
+                tail.next = curr1;
+                curr1 = curr1.next;
+            }else if(curr2.val < curr1.val){
+                tail.next = curr2;
+                curr2 = curr2.next;
+            }
+            tail = tail.next;
+        }
+        System.out.println();
+        printNode(dummy.next);
+    }
+
+}
+public class expert {
+    public static void main(String[] args) {
+        ListNode list = new ListNode();
+        ListNode node = new ListNode(4);
+        ListNode node2 = new ListNode(4);
+        node.head = new ListNode(6);
+        ListNode sec = new ListNode(1);
+        ListNode third = new ListNode(3);
+        ListNode four = new ListNode(8);
+        node.head.next = sec;
+        sec.next = third;
+        third.next = four;
+        node.printNode(node.head);
+        System.out.println();
+        node2.head = new ListNode(2);
+        ListNode two = new ListNode(5);
+        ListNode tre = new ListNode(6);
+        ListNode fou = new ListNode(7);
+
+        node2.head.next = two;
+        two.next = tre;
+        tre.next = fou;
+        node2.printNode(node2.head);
+
+        list.mergeLinkedList(node,node2);
+    }
+}*/
+package com.practiceCode;
+import java.util.List;
+class ListNode{
+    ListNode head;
+    ListNode next;
+    int val;
+    ListNode(){}
+    ListNode(int val){
+        this.val = val;
+        this.next = null;
+    }
+
+    void printList(ListNode head){
+        while(head != null){
+            System.out.print(head.val+"-");
+            head = head.next;
+        }
+        System.out.println();
+    }
+
+    void creation(ListNode list,int val){
+        ListNode curr = new ListNode(val);
+        if(list.head == null){
+            list.head = curr;
+        }else{
+            ListNode tmp = list.head;
+            while(tmp.next != null){
+                tmp = tmp.next;
+            }
+            tmp.next = curr;
+        }
+    }
+
+    void insertAtFirst(ListNode list,int val){
+        ListNode curr  =new ListNode(val);
+        if(list.head == null){
+           list.head =  curr;
+       }else{
+            ListNode tmp  = list.head;
+            list.head = curr;
+            curr.next = tmp;
+        }
+    }
+
+    void mergesorted(ListNode list1,ListNode list2){
+        ListNode curr1 = list1.head;
+        ListNode curr2 = list2.head;
+
+        if(curr1 == null && curr2 == null) {
+            System.out.println("Return");
+            return;
+        }
+
+        ListNode dummy = new ListNode();
+        ListNode tail = dummy;
+        while(curr1 != null && curr2 != null)
+        {
+//            System.out.println(curr1.val +" " + curr2.val);
+            if(curr1.val <= curr2.val){
+                tail.next = curr1;
+                curr1 = curr1.next;
+            }
+            else if(curr1.val > curr2.val)
+            {
+                tail.next = curr2;
+                curr2 = curr2.next;
+            }
+            tail = tail.next;
+        }
+
+        while(curr1 != null){
+            tail.next = curr1;
+            curr1 = curr1.next;
+            tail = tail.next;
+        }
+        while(curr2 != null){
+            tail.next = curr2;
+            curr2 = curr2.next;
+            tail = tail.next;
+        }
+        printList(dummy.next);
+    }
+}
+public class expert {
+    public static void main(String[] args) {
+        ListNode node = new ListNode();
+        ListNode node1 = new ListNode();
+        ListNode node2 = new ListNode();
+        node.creation(node1,0);
+        node.creation(node1,2);
+        node.creation(node1,5);
+        node.creation(node1,6);
+        node.printList(node1.head);
+
+        node.creation(node2,0);
+        node.creation(node2,4);
+        node.creation(node2,7);
+        node.creation(node2,9);
+        node.printList(node2.head);
+
+        node.mergesorted(node1,node2);
+
+    }
+}
 
 
 
