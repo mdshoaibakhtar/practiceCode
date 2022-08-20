@@ -5903,6 +5903,7 @@ public class expert {
         list.mergeLinkedList(node,node2);
     }
 }*/
+/*
 package com.practiceCode;
 import java.util.List;
 class ListNode{
@@ -6007,8 +6008,24 @@ public class expert {
 
     }
 }
+package com.practiceCode;
+public class expert {
+    public static void main(String[] args) {
+        String name  = "mdshoaibakhtar";
+        String temp = "";
+        for(int i=name.length()-1;i>= 0;i--){
+            temp += name.charAt(i);
+        }
+        System.out.println(temp);
 
-
+    }
+} */
+package com.practiceCode;
+public class expert {
+    public static void main(String[] args) {
+        String
+    }
+}
 
 
 
