@@ -5902,8 +5902,7 @@ public class expert {
 
         list.mergeLinkedList(node,node2);
     }
-}*/
-/*
+}
 package com.practiceCode;
 import java.util.List;
 class ListNode{
@@ -6019,21 +6018,65 @@ public class expert {
         System.out.println(temp);
 
     }
-} */
+}
+package com.practiceCode;
+class mathematics{
+    void oddEven(int n){
+        if(n % 2 == 0)
+            System.out.println("Even");
+        else
+            System.out.println("Odd");
+    }
+
+    void prime(int n){
+        int ans = 0;
+        for(int i=2;i<n/2;i++){
+            if(n % i == 0){
+                ans++;
+            }
+            if(ans >= 1){
+                System.out.println("Not a Prime");
+                System.exit(1);
+            }
+        }
+        System.out.println("Prime");
+    }
+
+    void nthTermVal(int a,int d,int n){
+        int ans = 0;
+        ans  = a + (n-1)*d;
+        System.out.println(ans);
+    }
+
+    void nthTerm(int a,int d,int val){
+        int n = 0;
+        n = ((val - a)/d)+1;
+        System.out.println(n);
+
+    }
+
+}
+public class expert {
+    public static void main(String[] args) {
+        mathematics math = new mathematics();
+        math.oddEven(11);
+        math.prime(29);
+        math.nthTermVal(4,2,5);
+        math.nthTerm(4,2,12);
+        math.closestNumber(10,4);
+
+        int p = -1;
+        System.out.println(p>>>30);
+        System.out.println(p>>>31);
+}
+}*/
+// Happy Coding
 package com.practiceCode;
 public class expert {
     public static void main(String[] args) {
-        String
+        System.out.println("Happy Coding");
     }
 }
-
-
-
-
-
-
-
-
 
 
 
